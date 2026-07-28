@@ -1,43 +1,43 @@
-using CmsModels;
-using DbContexts;
-using Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Service;
 using CmsMvc.Data;
+using DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Configuration.AddUserSecrets<Program>();
 builder.Services.AddControllersWithViews();
-var databaseProvider =
-    builder.Configuration["DatabaseProvider"] ?? "Sqlite";
+//var databaseProvider =
+//    builder.Configuration["DatabaseProvider"] ?? "Sqlite";
+//var databaseProvider =
+//    builder.Configuration["DatabaseProvider"]
+//    ?? throw new InvalidOperationException(
+//        "DatabaseProvider is missing.");
 
-var connectionString =
-    builder.Configuration.GetConnectionString("CmsDatabase")
-    ?? throw new InvalidOperationException(
-        "The CmsDatabase connection string is missing.");
+//var connectionString =
+//    builder.Configuration.GetConnectionString("CmsDatabase")
+//    ?? throw new InvalidOperationException(
+//        "The CmsDatabase connection string is missing.");
 
-builder.Services.AddDbContext<LocalDbContext>(options =>
-{
-    if (databaseProvider.Equals(
-            "SqlServer",
-            StringComparison.OrdinalIgnoreCase))
-    {
-        options.UseSqlServer(
-            connectionString,
-            sqlOptions =>
-            {
-                sqlOptions.EnableRetryOnFailure();
-            });
-    }
-    else
-    {
-        options.UseSqlite(connectionString);
-    }
-});
 //builder.Services.AddDbContext<LocalDbContext>(options =>
-//    options.UseSqlite(
-//        builder.Configuration.GetConnectionString("CmsDatabase")
-//        ?? "Data Source=localcms.db"));
+//{
+//    if (databaseProvider.Equals(
+//            "SqlServer",
+//            StringComparison.OrdinalIgnoreCase))
+//    {
+//        options.UseSqlServer(
+//            connectionString,
+//            sqlOptions =>
+//            {
+//                sqlOptions.EnableRetryOnFailure();
+//            });
+//    }
+//    else
+//    {
+//        options.UseSqlite(connectionString);
+//    }
+//});
+builder.Services.AddDbContext<LocalDbContext>(options =>
+    options.UseAzureSql(
+        builder.Configuration.GetConnectionString("CmsDatabase")));
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())

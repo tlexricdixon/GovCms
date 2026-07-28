@@ -3,6 +3,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>3e03d0ee-be26-4eb2-a944-4d5fa5cc2a60</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,6 @@
     <ProjectReference Include="..\CmsCore\Interfaces.csproj" />
     <ProjectReference Include="..\DbContext\DbContexts.csproj" />
     <ProjectReference Include="..\Models\CmsModels.csproj" />
-    <ProjectReference Include="..\SyncService\Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
