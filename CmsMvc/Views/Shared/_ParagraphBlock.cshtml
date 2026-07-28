@@ -1,0 +1,21 @@
+﻿@model CmsModels.PageBlock
+
+@switch (Model.HeadingLevel)
+{
+    case 2:
+        <h2>@Model.HeadingText</h2>
+        break;
+
+    case 3:
+        <h3>@Model.HeadingText</h3>
+        break;
+
+    case 4:
+        <h4>@Model.HeadingText</h4>
+        break;
+
+    default:
+        <h2>@Model.HeadingText</h2>
+        break;
+}
+<p>@Model.ParagraphText</p>

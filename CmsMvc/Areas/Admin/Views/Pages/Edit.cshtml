@@ -1,0 +1,248 @@
+﻿@model CmsMvc.Areas.Admin.Models.PageEditViewModel
+
+@{
+    ViewData["Title"] = $"Edit {Model.Title}";
+    var blocks = Model.PageBlocks
+       .OrderBy(block => block.SortOrder)
+       .ThenBy(block => block.Id)
+       .ToList();
+
+    var blockIndex = 0;
+}
+
+<div class="d-flex justify-content-between align-items-start mb-4">
+    <div>
+        <h1>Edit Page</h1>
+        <p class="text-muted mb-0">
+            Update page details and manage content blocks.
+        </p>
+    </div>
+
+    <div>
+        <a asp-area=""
+           asp-controller="Page"
+           asp-action="Preview"
+           asp-route-slug="@Model.Slug"
+           class="btn btn-outline-secondary"
+           target="_blank">
+            Preview
+        </a>
+        @if (Model.IsPublished)
+        {
+            <form asp-area="Admin"
+                  asp-controller="Pages"
+                  asp-action="Unpublish"
+                  asp-route-id="@Model.Id"
+                  method="post">
+                <button type="submit"
+                        class="btn btn-outline-warning">
+                    Unpublish
+                </button>
+            </form>
+        }
+        else
+        {
+            <form asp-area="Admin"
+                  asp-controller="Pages"
+                  asp-action="Publish"
+                  asp-route-id="@Model.Id"
+                  method="post">
+                <button type="submit"
+                        class="btn btn-success">
+                    Publish
+                </button>
+            </form>
+        }
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success" role="status">
+        @successMessage
+    </div>
+}
+
+<form asp-area="Admin"
+      asp-controller="Pages"
+      asp-action="Edit"
+      asp-route-id="@Model.Id"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title"
+               class="form-control"
+               autocomplete="off" />
+        <span asp-validation-for="Title"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Slug" class="form-label">Slug</label>
+        <input asp-for="Slug"
+               class="form-control"
+               autocomplete="off"
+               aria-describedby="slug-help" />
+
+        <div id="slug-help" class="form-text">
+            Lowercase letters, numbers, and hyphens only.
+        </div>
+
+        <span asp-validation-for="Slug"
+              class="text-danger"></span>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">
+            @(Model.IsPublished ? "Published" : "Draft")
+        </dd>
+
+        <dt class="col-sm-3">Published</dt>
+        <dd class="col-sm-9">
+            @(Model.PublishedAt?.ToLocalTime().ToString("g") ?? "Not published")
+        </dd>
+
+        <dt class="col-sm-3">Last modified</dt>
+        <dd class="col-sm-9">
+            @Model.LastModified.ToLocalTime().ToString("g")
+        </dd>
+    </dl>
+
+    <button type="submit" class="btn btn-primary">
+        Save Changes
+    </button>
+
+    <a asp-action="Index" class="btn btn-link">
+        Back to Pages
+    </a>
+</form>
+
+<hr class="my-5" />
+
+<section aria-labelledby="blocks-heading">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 id="blocks-heading">Content Blocks</h2>
+    </div>
+    <form asp-area="Admin"
+          asp-controller="Pages"
+          asp-action="AddBlock"
+          asp-route-id="@Model.Id"
+          method="post"
+          class="d-flex gap-2 align-items-end">
+
+        <div>
+            <label asp-for="NewBlockType" class="form-label">
+                Block type
+            </label>
+
+            <select id="BlockType"
+                    name="BlockType"
+                    class="form-select"
+                    asp-items="Html.GetEnumSelectList<CmsModels.BlockType>()">
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">
+            Add Block
+        </button>
+    </form>
+    @if (Model.PageBlocks.Count > 0)
+    {
+        <ol class="list-group list-group-numbered">
+            @foreach (var block in blocks)
+            {
+                var isFirst = blockIndex == 0;
+                var isLast = blockIndex == blocks.Count - 1;
+
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-start gap-3">
+                        <div>
+                            <strong>@block.BlockType</strong>
+
+                            @switch (block.BlockType)
+                            {
+                                case CmsModels.BlockType.Heading:
+                                    <div>@block.HeadingText</div>
+                                    break;
+
+                                case CmsModels.BlockType.Paragraph:
+                                    <div>@block.ParagraphText</div>
+                                    break;
+
+                                case CmsModels.BlockType.Link:
+                                    <div>
+                                        @block.LinkText
+                                        <span class="text-muted">
+                                            (@block.LinkUrl)
+                                        </span>
+                                    </div>
+                                    break;
+                            }
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <form asp-area="Admin"
+                                  asp-controller="Pages"
+                                  asp-action="MoveBlockUp"
+                                  asp-route-pageId="@Model.Id"
+                                  asp-route-blockId="@block.Id"
+                                  method="post">
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        disabled="@isFirst">
+                                    Move Up
+                                </button>
+                            </form>
+
+                            <form asp-area="Admin"
+                                  asp-controller="Pages"
+                                  asp-action="MoveBlockDown"
+                                  asp-route-pageId="@Model.Id"
+                                  asp-route-blockId="@block.Id"
+                                  method="post">
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        disabled="@isLast">
+                                    Move Down
+                                </button>
+                            </form>
+
+                            <a asp-area="Admin"
+                               asp-controller="Pages"
+                               asp-action="EditBlock"
+                               asp-route-pageId="@Model.Id"
+                               asp-route-blockId="@block.Id"
+                               class="btn btn-sm btn-outline-primary">
+                                Edit
+                            </a>
+
+                            <form asp-area="Admin"
+                                  asp-controller="Pages"
+                                  asp-action="DeleteBlock"
+                                  asp-route-pageId="@Model.Id"
+                                  asp-route-blockId="@block.Id"
+                                  method="post">
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Delete this block?');">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+
+                blockIndex++;
+            }
+        </ol>
+    }
+</section>

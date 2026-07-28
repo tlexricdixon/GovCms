@@ -1,0 +1,19 @@
+﻿@model CmsModels.Page
+
+@foreach (var block in Model.PageBlocks.OrderBy(block => block.SortOrder))
+{
+    switch (block.BlockType)
+    {
+        case BlockType.Heading:
+            <partial name="Blocks/_HeadingBlock" model="block" />
+            break;
+
+        case BlockType.Paragraph:
+            <partial name="Blocks/_ParagraphBlock" model="block" />
+            break;
+
+        case BlockType.Link:
+            <partial name="Blocks/_LinkBlock" model="block" />
+            break;
+    }
+}

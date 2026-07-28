@@ -1,0 +1,41 @@
+html {
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body {
+    margin: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -5rem;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+header,
+main {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 1rem;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+
+.eyebrow {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.security-note {
+    padding: 1rem;
+    border: 2px solid currentColor;
+}

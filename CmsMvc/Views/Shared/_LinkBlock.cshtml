@@ -1,0 +1,10 @@
+﻿@model CmsModels.PageBlock
+
+@if (!string.IsNullOrWhiteSpace(Model.LinkUrl) &&
+     !string.IsNullOrWhiteSpace(Model.LinkText))
+{
+    <a href="@Model.LinkUrl"
+       target="@(Model.OpenInNewWindow ? "_blank" : null)">
+        @Model.LinkText
+    </a>
+}

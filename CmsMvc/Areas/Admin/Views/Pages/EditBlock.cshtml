@@ -1,0 +1,121 @@
+﻿@model CmsModels.PageBlock
+
+@{
+    ViewData["Title"] = $"Edit {Model.BlockType} Block";
+}
+
+<h1>Edit @Model.BlockType Block</h1>
+
+<form asp-area="Admin"
+      asp-controller="Pages"
+      asp-action="EditBlock"
+      asp-route-pageId="@Model.PageId"
+      asp-route-blockId="@Model.Id"
+      method="post">
+
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="PageId" type="hidden" />
+    <input asp-for="BlockType" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    @switch (Model.BlockType)
+    {
+        case CmsModels.BlockType.Heading:
+            <div class="mb-3">
+                <label asp-for="HeadingText"
+                       class="form-label">
+                    Heading text
+                </label>
+
+                <input asp-for="HeadingText"
+                       class="form-control" />
+
+                <span asp-validation-for="HeadingText"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="HeadingLevel"
+                       class="form-label">
+                    Heading level
+                </label>
+
+                <select asp-for="HeadingLevel"
+                        class="form-select">
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option value="4">Heading 4</option>
+                </select>
+            </div>
+            break;
+
+        case CmsModels.BlockType.Paragraph:
+            <div class="mb-3">
+                <label asp-for="ParagraphText"
+                       class="form-label">
+                    Paragraph text
+                </label>
+
+                <textarea asp-for="ParagraphText"
+                          class="form-control"
+                          rows="8"></textarea>
+
+                <span asp-validation-for="ParagraphText"
+                      class="text-danger"></span>
+            </div>
+            break;
+
+        case CmsModels.BlockType.Link:
+            <div class="mb-3">
+                <label asp-for="LinkText"
+                       class="form-label">
+                    Link text
+                </label>
+
+                <input asp-for="LinkText"
+                       class="form-control" />
+
+                <span asp-validation-for="LinkText"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LinkUrl"
+                       class="form-label">
+                    Link URL
+                </label>
+
+                <input asp-for="LinkUrl"
+                       class="form-control" />
+
+                <span asp-validation-for="LinkUrl"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="OpenInNewWindow"
+                       class="form-check-input" />
+
+                <label asp-for="OpenInNewWindow"
+                       class="form-check-label">
+                    Open in a new window
+                </label>
+            </div>
+            break;
+    }
+
+    <button type="submit"
+            class="btn btn-primary">
+        Save Block
+    </button>
+
+    <a asp-area="Admin"
+       asp-controller="Pages"
+       asp-action="Edit"
+       asp-route-id="@Model.PageId"
+       class="btn btn-link">
+        Cancel
+    </a>
+</form>

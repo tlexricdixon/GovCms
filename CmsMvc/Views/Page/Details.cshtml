@@ -1,0 +1,46 @@
+﻿@model CmsModels.Page
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h1>@Model.Title</h1>
+
+@foreach (var block in Model.PageBlocks.OrderBy(block => block.SortOrder))
+{
+    switch (block.BlockType)
+    {
+        case CmsModels.BlockType.Heading:
+            switch (block.HeadingLevel)
+            {
+                case 3:
+                    <h3>@block.HeadingText</h3>
+                    break;
+                case 4:
+                    <h4>@block.HeadingText</h4>
+                    break;
+                default:
+                    <h2>@block.HeadingText</h2>
+                    break;
+            }
+            break;
+
+        case CmsModels.BlockType.Paragraph:
+            <p>@block.ParagraphText</p>
+            break;
+
+        case CmsModels.BlockType.Link:
+            if (!string.IsNullOrWhiteSpace(block.LinkUrl) &&
+                !string.IsNullOrWhiteSpace(block.LinkText))
+            {
+                <p>
+                    <a href="@block.LinkUrl"
+                       target="@(block.OpenInNewWindow ? "_blank" : null)"
+                       rel="@(block.OpenInNewWindow ? "noopener noreferrer" : null)">
+                        @block.LinkText
+                    </a>
+                </p>
+            }
+            break;
+    }
+}

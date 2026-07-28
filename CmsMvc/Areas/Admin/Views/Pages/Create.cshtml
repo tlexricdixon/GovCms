@@ -1,0 +1,54 @@
+﻿@model PageCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Page";
+}
+
+<h1>Create Page</h1>
+
+<form asp-area="Admin"
+      asp-controller="Pages"
+      asp-action="Create"
+      method="post">
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+
+        <input asp-for="Title"
+               class="form-control"
+               autocomplete="off" />
+<p>This is the direcory level</p>
+        <span asp-validation-for="Title"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Slug" class="form-label"></label>
+
+        <input asp-for="Slug"
+               class="form-control"
+               autocomplete="off"
+               aria-describedby="slug-help" />
+<p>This is the page action</p>
+        <div id="slug-help" class="form-text">
+            Example: about-us
+        </div>
+
+        <span asp-validation-for="Slug"
+              class="text-danger"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">
+        Create Draft
+    </button>
+
+    <a asp-area="Admin"
+       asp-controller="Pages"
+       asp-action="Index"
+       class="btn btn-link">
+        Cancel
+    </a>
+</form>
