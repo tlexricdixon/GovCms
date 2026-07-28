@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CmsMvc.Controllers;
 
-[Authorize]
+
 public sealed class PageController(LocalDbContext db) : Controller
 {
     [HttpGet("pages/{slug}")]

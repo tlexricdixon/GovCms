@@ -1,13 +1,12 @@
 ﻿using CmsModels;
 using CmsMvc.Areas.Admin.Models;
 using DbContexts;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CmsMvc.Areas.Admin.Controllers;
 
-[Authorize]
+
 [Area("Admin")]
 [Route("admin/pages")]
 public sealed class PagesController(LocalDbContext db) : Controller
@@ -137,7 +136,7 @@ public sealed class PagesController(LocalDbContext db) : Controller
             ModelState.AddModelError(
                 nameof(model.Slug),
                 "A page with this slug already exists.");
-            
+
             model.PageBlocks = await db.PageBlocks
                 .AsNoTracking()
                 .Where(block => block.PageId == id)
