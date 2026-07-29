@@ -14,10 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CmsCore\Interfaces.csproj" />
     <ProjectReference Include="..\DbContext\DbContexts.csproj" />
+    <ProjectReference Include="..\Localization\Localization.csproj" />
+    <ProjectReference Include="..\Manaager\Manager.csproj" />
     <ProjectReference Include="..\Models\CmsModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
 </Project>
