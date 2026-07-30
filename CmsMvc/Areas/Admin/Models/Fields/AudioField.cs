@@ -8,9 +8,8 @@
  *
  */
 
-using Piranha.Models;
 
-namespace Piranha.Extend.Fields;
+namespace CmsMvc.Areas.Admin.Models.Fields;
 
 /// <summary>
 /// Field for referencing an audio asset.

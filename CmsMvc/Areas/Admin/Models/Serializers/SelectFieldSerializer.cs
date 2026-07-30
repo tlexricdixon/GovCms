@@ -8,15 +8,15 @@
  *
  */
 
-using Piranha.Extend.Fields;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Extend.Serializers;
+namespace CmsMvc.Areas.Admin.Models.Serializers;
 
 /// <summary>
 /// Serializer for select fields.
 /// </summary>
 /// <typeparam name="T">The field type</typeparam>
-public class SelectFieldSerializer<T> : ISerializer where T : Fields.SelectFieldBase
+public class SelectFieldSerializer<T> : ISerializer where T : SelectFieldBase
 {
     /// <inheritdoc />
     public string Serialize(object obj)

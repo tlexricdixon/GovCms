@@ -1,4 +1,4 @@
-﻿using CmsModels;
+﻿using Manager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

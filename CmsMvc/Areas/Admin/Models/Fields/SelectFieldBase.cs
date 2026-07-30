@@ -10,7 +10,8 @@
 
 using Newtonsoft.Json;
 
-namespace Piranha.Extend.Fields;
+
+namespace CmsMvc.Areas.Admin.Models.Fields;
 
 /// <summary>
 /// Base class for all SelectFields.

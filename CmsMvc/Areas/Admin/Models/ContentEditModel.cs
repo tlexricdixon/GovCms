@@ -8,10 +8,10 @@
  *
  */
 
-using Piranha.Extend.Fields;
-using Piranha.Models;
+using CmsMvc.Areas.Admin.Models.Content;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Manager.Models;
+namespace CmsMvc.Areas.Admin.Models;
 
 public class ContentEditModel : AsyncResult
 {
@@ -107,17 +107,17 @@ public class ContentEditModel : AsyncResult
     /// <summary>
     /// Gets/sets the available blocks.
     /// </summary>
-    public IList<Content.BlockModel> Blocks { get; set; } = new List<Content.BlockModel>();
+    public IList<BlockModel> Blocks { get; set; } = new List<BlockModel>();
 
     /// <summary>
     /// Gets/sets the available regions.
     /// </summary>
-    public IList<Content.RegionModel> Regions { get; set; } = new List<Content.RegionModel>();
+    public IList<RegionModel> Regions { get; set; } = new List<RegionModel>();
 
     /// <summary>
     /// Gets/sets the available custom editors.
     /// </summary>
-    public IList<Content.EditorModel> Editors { get; set; } = new List<Content.EditorModel>();
+    public IList<EditorModel> Editors { get; set; } = new List<EditorModel>();
 
     /// <summary>
     /// Gets/sets the available languages.

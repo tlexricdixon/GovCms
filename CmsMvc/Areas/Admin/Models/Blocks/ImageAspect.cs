@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Extend.Blocks;
+namespace CmsMvc.Areas.Admin.Models.Blocks;
 
 /// <summary>
 /// The different image aspects available

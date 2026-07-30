@@ -1,16 +1,11 @@
-/*
- * Copyright (c) .NET Foundation and Contributors
- *
- * This software may be modified and distributed under the terms
- * of the MIT license. See the LICENSE file for details.
- *
- * https://github.com/piranhacms/piranha.core
- *
- */
 
-using Piranha.Extend.Fields;
 
-namespace Piranha.Extend.Blocks;
+
+using Manager.Models;
+using CmsMvc.Areas.Admin.Data;
+using CmsMvc.Areas.Admin.Models.Fields;
+
+namespace CmsMvc.Areas.Admin.Models.Blocks;
 
 /// <summary>
 /// Audio block.

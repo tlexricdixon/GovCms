@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="10.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Localization\Localization.csproj" />
+    <ProjectReference Include="..\Models\CmsModels.csproj" />
   </ItemGroup>
 
 </Project>

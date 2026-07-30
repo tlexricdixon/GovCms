@@ -8,9 +8,9 @@
  *
  */
 
-using Piranha.Extend.Fields;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Extend.Serializers;
+namespace CmsMvc.Areas.Admin.Models.Serializers;
 
 /// <summary>
 /// Serializer for document fields.

@@ -8,9 +8,9 @@
  *
  */
 
-using Piranha.Extend.Fields;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Manager.Models;
+namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
 /// Page edit model.

@@ -8,13 +8,15 @@
  *
  */
 
-namespace Piranha.Extend.Serializers;
+using CmsMvc.Areas.Admin.Models.Fields;
+
+namespace CmsMvc.Areas.Admin.Models.Serializers;
 
 /// <summary>
 /// Serialized for checkbox fields.
 /// </summary>
 /// <typeparam name="T">The field type</typeparam>
-public class CheckBoxFieldSerializer<T> : ISerializer where T : Fields.SimpleField<bool>
+public class CheckBoxFieldSerializer<T> : ISerializer where T : SimpleField<bool>
 {
     /// <inheritdoc />
     public string Serialize(object obj)

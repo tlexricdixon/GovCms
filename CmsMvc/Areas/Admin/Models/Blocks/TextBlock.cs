@@ -8,9 +8,9 @@
  *
  */
 
-using Piranha.Extend.Fields;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Extend.Blocks;
+namespace CmsMvc.Areas.Admin.Models.Blocks;
 
 /// <summary>
 /// Single column text block.

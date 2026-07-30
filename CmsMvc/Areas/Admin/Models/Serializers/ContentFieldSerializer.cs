@@ -8,9 +8,9 @@
  *
  */
 
-using Piranha.Extend.Fields;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Extend.Serializers;
+namespace CmsMvc.Areas.Admin.Models.Serializers;
 
 /// <summary>
 /// Serializer for content fields.
@@ -20,7 +20,7 @@ public class ContentFieldSerializer : ISerializer
     /// <inheritdoc />
     public string Serialize(object obj)
     {
-        if (obj is Fields.ContentField field)
+        if (obj is ContentField field)
         {
             return field.Id.ToString();
         }

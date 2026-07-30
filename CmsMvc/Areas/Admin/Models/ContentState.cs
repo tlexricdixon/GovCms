@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Manager.Models;
+namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
 /// The different states revision based content can have.

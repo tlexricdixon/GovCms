@@ -8,7 +8,8 @@
  *
  */
 
-namespace Piranha.Manager.Models;
+
+namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
 /// Alias model.
