@@ -1,4 +1,4 @@
-﻿using CmsModels;
+﻿using Manager.Models;
 using CmsMvc.Areas.Admin.Models;
 using DbContexts;
 using Microsoft.AspNetCore.Mvc;

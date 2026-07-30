@@ -8,13 +8,15 @@
  *
  */
 
-namespace Piranha.Extend.Serializers;
+using CmsMvc.Areas.Admin.Models.Fields;
+
+namespace CmsMvc.Areas.Admin.Models.Serializers;
 
 /// <summary>
 /// Serializer for string based fields.
 /// </summary>
 /// <typeparam name="T">The field type</typeparam>
-public class StringFieldSerializer<T> : ISerializer where T : Fields.SimpleField<string>
+public class StringFieldSerializer<T> : ISerializer where T : SimpleField<string>
 {
     /// <inheritdoc />
     public string Serialize(object obj)

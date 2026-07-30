@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Manager.Models;
+namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
 /// Status message to pass from an api to the manager interface.

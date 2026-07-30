@@ -8,9 +8,9 @@
  *
  */
 
-using Piranha.Manager.Models.Content;
+using CmsMvc.Areas.Admin.Models.Content;
 
-namespace Piranha.Manager.Models;
+namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
 /// Page list model.

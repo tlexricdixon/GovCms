@@ -10,7 +10,7 @@
 
 using Microsoft.AspNetCore.Http;
 
-namespace Piranha.Manager.Models;
+namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
 /// Model for uploading a new media asset.

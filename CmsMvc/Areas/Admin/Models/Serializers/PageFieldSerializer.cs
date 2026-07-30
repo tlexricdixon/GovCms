@@ -8,9 +8,9 @@
  *
  */
 
-using Piranha.Extend.Fields;
+using CmsMvc.Areas.Admin.Models.Fields;
 
-namespace Piranha.Extend.Serializers;
+namespace CmsMvc.Areas.Admin.Models.Serializers;
 
 /// <summary>
 /// Serializer for page fields.
@@ -20,7 +20,7 @@ public class PageFieldSerializer : ISerializer
     /// <inheritdoc />
     public string Serialize(object obj)
     {
-        if (obj is Fields.PageField field)
+        if (obj is PageField field)
         {
             return field.Id.ToString();
         }
