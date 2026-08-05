@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Models\CmsModels.csproj" />
+    <ProjectReference Include="..\Models\Manager.csproj" />
   </ItemGroup>
 
 </Project>

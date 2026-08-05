@@ -1,4 +1,4 @@
-﻿using CmsModels;
+﻿using Manager.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace CmsMvc.Areas.Admin.Models;
