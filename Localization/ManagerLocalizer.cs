@@ -10,88 +10,88 @@ namespace Localization
         /// <summary>
         /// Gets/sets alias string resources.
         /// </summary>
-        public IStringLocalizer<Localization.Alias> Alias { get; private set; }
+        public IStringLocalizer<Localization.Resources.Alias> Alias { get; private set; }
 
         /// <summary>
         /// Gets/sets comment string resources.
         /// </summary>
         /// <value></value>
-        public IStringLocalizer<Localization.Comment> Comment { get; private set; }
+        public IStringLocalizer<Localization.Resources.Comment> Comment { get; private set; }
 
         /// <summary>
         /// Gets/sets content string resources.
         /// </summary>
         /// <value></value>
-        public IStringLocalizer<Localization.Content> Content { get; private set; }
+        public IStringLocalizer<Localization.Resources.Content> Content { get; private set; }
 
         /// <summary>
         /// Gets/sets config string resources.
         /// </summary>
-        public IStringLocalizer<Localization.Config> Config { get; private set; }
+        public IStringLocalizer<Localization.Resources.Config> Config { get; private set; }
 
         /// <summary>
         /// Gets/sets general string resources.
         /// </summary>
-        public IStringLocalizer<Localization.General> General { get; private set; }
+        public IStringLocalizer<Localization.Resources.General> General { get; private set; }
 
         /// <summary>
         /// Gets/sets security string resources.
         /// </summary>
         /// <value></value>
-        public IStringLocalizer<Localization.Security> Security { get; private set; }
+        public IStringLocalizer<Localization.Resources.Security> Security { get; private set; }
 
         /// <summary>
         /// Gets/sets language string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Language> Language { get; private set; }
+        public IStringLocalizer<Localization.Resources.Language> Language { get; private set; }
 
         /// <summary>
         /// Gets/sets media string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Media> Media { get; private set; }
+        public IStringLocalizer<Localization.Resources.Media> Media { get; private set; }
 
         /// <summary>
         /// Gets/sets menu string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Menu> Menu { get; private set; }
+        public IStringLocalizer<Localization.Resources.Menu> Menu { get; private set; }
 
         /// <summary>
         /// Gets/sets module string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Module> Module { get; private set; }
+        public IStringLocalizer<Localization.Resources.Module> Module { get; private set; }
 
         /// <summary>
         /// Gets/sets page string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Page> Page { get; private set; }
+        public IStringLocalizer<Localization.Resources.Page> Page { get; private set; }
 
         /// <summary>
         /// Gets/sets post string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Post> Post { get; private set; }
+        public IStringLocalizer<Localization.Resources.Post> Post { get; private set; }
 
         /// <summary>
         /// Gets/sets site string localization.
         /// </summary>
-        public IStringLocalizer<Localization.Site> Site { get; private set; }
+        public IStringLocalizer<Localization.Resources.Site> Site { get; private set; }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public ManagerLocalizer(
-            IStringLocalizer<Localization.Alias> alias,
-            IStringLocalizer<Localization.Comment> comment,
-            IStringLocalizer<Localization.Content> content,
-            IStringLocalizer<Localization.Config> config,
-            IStringLocalizer<Localization.General> general,
-            IStringLocalizer<Localization.Security> security,
-            IStringLocalizer<Localization.Language> language,
-            IStringLocalizer<Localization.Media> media,
-            IStringLocalizer<Localization.Menu> menu,
-            IStringLocalizer<Localization.Module> module,
-            IStringLocalizer<Localization.Page> page,
-            IStringLocalizer<Localization.Post> post,
-            IStringLocalizer<Localization.Site> site)
+            IStringLocalizer<Localization.Resources.Alias> alias,
+            IStringLocalizer<Localization.Resources.Comment> comment,
+            IStringLocalizer<Localization.Resources.Content> content,
+            IStringLocalizer<Localization.Resources.Config> config,
+            IStringLocalizer<Localization.Resources.General> general,
+            IStringLocalizer<Localization.Resources.Security> security,
+            IStringLocalizer<Localization.Resources.Language> language,
+            IStringLocalizer<Localization.Resources.Media> media,
+            IStringLocalizer<Localization.Resources.Menu> menu,
+            IStringLocalizer<Localization.Resources.Module> module,
+            IStringLocalizer<Localization.Resources.Page> page,
+            IStringLocalizer<Localization.Resources.Post> post,
+            IStringLocalizer<Localization.Resources.Site> site)
         {
             Alias = alias;
             Comment = comment;

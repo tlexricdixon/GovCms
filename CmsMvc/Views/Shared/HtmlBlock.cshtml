@@ -1,3 +1,8 @@
+@using CmsMvc.Services
+@inject IHtmlSanitizer HtmlSanitizer
 @model Manager.Models.Extend.Blocks.HtmlBlock
 
-@Html.Raw(Model)
+@if (!string.IsNullOrWhiteSpace(Model?.Body))
+{
+    @Html.Raw(HtmlSanitizer.Sanitize(Model.Body))
+}
