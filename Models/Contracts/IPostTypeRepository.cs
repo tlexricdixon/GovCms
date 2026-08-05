@@ -1,4 +1,6 @@
-﻿namespace Manager.Contracts;
+﻿using Manager.Models;
+
+namespace Manager.Contracts;
 
 public interface IPostTypeRepository
 {

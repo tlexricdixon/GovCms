@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Manager.Models;
 
 [Serializable]
-public abstract class Alias
+public class Alias
 {
     /// <summary>
     /// Gets/sets the unique id.

@@ -1,12 +1,12 @@
 ﻿@* @inject IAuthorizationService Auth *@
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@
 
 <div id="languageedit" class="modal modal-panel fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- Modal header -->
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title"><i class="fas fa-globe-europe"></i> @Localizer.General["Languages"]</h5>
+                <h5 class="modal-title"><i class="fas fa-globe-europe"></i> @* @Localizer.General["Languages"] *@</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,9 +18,9 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <th class="w-100">@Localizer.General["Title"]</th>
-                                <th class="text-center">@Localizer.General["Culture"]</th>
-                                <th class="text-center">@Localizer.General["Default"]</th>
+                                <th class="w-100">@* @Localizer.General["Title"] *@</th>
+                                <th class="text-center">@* @Localizer.General["Culture"] *@</th>
+                                <th class="text-center">@* @Localizer.General["Default"] *@</th>
                                 <th class="actions one"></th>
                             </tr>
                         </thead>
@@ -45,30 +45,30 @@
                         </tbody>
                     </table>
                     <div v-if="showDefaultInfo" class="alert alert-primary w-100" role="alert">
-                        <h5>@Localizer.Site["Are you really sure?"]</h5>
+                        <h5>@* @Localizer.Site["Are you really sure?"] *@</h5>
                         <p>
-                            @Html.Raw(@Localizer.Language["ChangeDefaultConfirm"])
+                           @*  @Html.Raw(@Localizer.Language["ChangeDefaultConfirm"])    *@ 
                         </p>
                         <p class="text-right">
                             <button v-on:click.prevent="setDefaultCancel" class="btn btn-sm btn-secondary">
-                                @Localizer.General["Cancel"]
+                                @* @Localizer.General["Cancel"] *@
                             </button>
                             <button v-on:click.prevent="setDefaultConfirm" class="btn btn-sm btn-labeled btn-success">
-                                <i class="fas fa-check"></i>@Localizer.General["Ok"]
+                                <i class="fas fa-check"></i>@* @Localizer.General["Ok"] *@
                             </button>
                         </p>
                     </div>
                     <div v-if="showDeleteInfo" class="alert alert-danger w-100">
-                        <h5>@Localizer.Site["Are you really sure?"]</h5>
+                        <h5>@* @Localizer.Site["Are you really sure?"] *@</h5>
                         <p>
-                            @Html.Raw(@Localizer.Language["RemoveLanguageConfirm"])
+                            @* @Html.Raw(@Localizer.Language["RemoveLanguageConfirm"]) *@
                         </p>
                         <p class="text-right">
                             <button v-on:click.prevent="removeCancel" class="btn btn-sm btn-secondary">
-                                @Localizer.General["Cancel"]
+                                @* @Localizer.General["Cancel"] *@
                             </button>
                             <button v-on:click.prevent="removeConfirm" class="btn btn-sm btn-labeled btn-danger">
-                                <i class="fas fa-trash"></i>@Localizer.General["Continue"]
+                                <i class="fas fa-trash"></i>@* @Localizer.General["Continue"] *@
                             </button>
                         </p>
                     </div>

@@ -8,8 +8,12 @@
  *
  */
 
+using Manager;
 using Manager.Cache;
 using Manager.Contracts;
+using Manager.Manager;
+using Manager.Models;
+using Manager.Models.Extend.Fields;
 using System.ComponentModel.DataAnnotations;
 
 namespace Services;
@@ -956,7 +960,7 @@ internal sealed class PostService : IPostService
             // Initialize primary image
             if (model.PrimaryImage == null)
             {
-                model.PrimaryImage = new Extend.Fields.ImageField();
+                model.PrimaryImage = new ImageField();
             }
 
             if (model.PrimaryImage.Id.HasValue)
@@ -967,7 +971,7 @@ internal sealed class PostService : IPostService
             // Initialize og image
             if (model.OgImage == null)
             {
-                model.OgImage = new Extend.Fields.ImageField();
+                model.OgImage = new ImageField();
             }
 
             if (model.OgImage.Id.HasValue)

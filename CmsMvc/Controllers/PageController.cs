@@ -13,37 +13,39 @@ public sealed class PageController(LocalDbContext db) : Controller
         string slug,
         CancellationToken cancellationToken)
     {
-        var page = await db.Pages
-            .AsNoTracking()
-            .Include(page => page.PageBlocks.OrderBy(block => block.SortOrder))
-            .SingleOrDefaultAsync(
-                page =>
-                    page.Slug == slug &&
-                    page.IsPublished &&
-                    page.IsActive,
-                cancellationToken);
+        //var page = await db.Pages
+        //    .AsNoTracking()
+        //    .Include(page => page.PageBlocks.OrderBy(block => block.SortOrder))
+        //    .SingleOrDefaultAsync(
+        //        page =>
+        //            page.Slug == slug &&
+        //            page.IsPublished &&
+        //            page.IsActive,
+        //        cancellationToken);
 
-        return page is null
-            ? NotFound()
-            : View(page);
+        //return page is null
+        //    ? NotFound()
+        //    : View(page);
+        return RedirectToAction("Preview", new { slug });
     }
     [HttpGet("pages/preview/{slug}")]
     public async Task<IActionResult> Preview(
         string slug,
         CancellationToken cancellationToken)
     {
-        var page = await db.Pages
-            .AsNoTracking()
-            .Include(page => page.PageBlocks.OrderBy(block => block.SortOrder))
-            .SingleOrDefaultAsync(
-                page =>
-                    page.Slug == slug &&
-                    //page.IsPublished &&
-                    page.IsActive,
-                cancellationToken);
+        //var page = await db.Pages
+        //    .AsNoTracking()
+        //    .Include(page => page.PageBlocks.OrderBy(block => block.SortOrder))
+        //    .SingleOrDefaultAsync(
+        //        page =>
+        //            page.Slug == slug &&
+        //            //page.IsPublished &&
+        //            page.IsActive,
+        //        cancellationToken);
 
-        return page is null
-            ? NotFound()
-            : View(page);
+        //return page is null
+        //    ? NotFound()
+        //    : View(page);
+        return View();
     }
 }

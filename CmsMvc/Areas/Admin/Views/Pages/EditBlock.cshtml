@@ -1,10 +1,10 @@
-﻿@model CmsModels.PageBlock
+﻿@* @model CmsModels.PageBlock *@
 
 @{
     ViewData["Title"] = $"Edit {Model.BlockType} Block";
 }
 
-<h1>Edit @Model.BlockType Block</h1>
+@* <h1>Edit @Model.BlockType Block</h1>
 
 <form asp-area="Admin"
       asp-controller="Pages"
@@ -118,4 +118,4 @@
        class="btn btn-link">
         Cancel
     </a>
-</form>
+</form> *@

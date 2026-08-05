@@ -1,4 +1,4 @@
-
+using Manager.Models;
 
 namespace CmsMvc.Areas.Admin.Models;
 

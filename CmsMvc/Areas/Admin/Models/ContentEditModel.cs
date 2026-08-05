@@ -9,7 +9,8 @@
  */
 
 using CmsMvc.Areas.Admin.Models.Content;
-using CmsMvc.Areas.Admin.Models.Fields;
+using Manager.Models;
+using Manager.Models.Extend.Fields;
 
 namespace CmsMvc.Areas.Admin.Models;
 

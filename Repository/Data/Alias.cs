@@ -1,11 +1,8 @@
-
-
-using Localization;
-
+using Manager.Models;
 namespace Repository.Data;
 
 [Serializable]
-public sealed class Alias : Models.Alias
+public sealed class Alias : Manager.Models.Alias
 {
     /// <summary>
     /// Gets/sets the site this alias is for.

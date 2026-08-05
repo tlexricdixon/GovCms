@@ -1,12 +1,12 @@
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@
 
 <table v-if="listView" class="table table-borderless table-media">
     <thead>
         <tr>
-            <th>@Localizer.General["Name"]</th>
-            <th class="td-medium">@Localizer.General["Type"]</th>
-            <th class="td-medium">@Localizer.General["Size"]</th>
-            <th class="td-small">@Localizer.General["Modified"]</th>
+            <th>@* @Localizer.General["Name"] *@</th>
+            <th class="td-medium">@* @Localizer.General["Type"] *@</th>
+            <th class="td-medium">@* @Localizer.General["Size"] *@</th>
+            <th class="td-small">@* @Localizer.General["Modified"] *@</th>
             <th class="actions one"></th>
         </tr>
     </thead>
@@ -26,7 +26,7 @@
             </td>
             <td></td>
             <td></td>
-            <td>{{ folder.itemCount + (folder.itemCount == 1 ? " @Localizer.General["item"]" : " @Localizer.General["items"]") }}</td>
+            <td>{{ folder.itemCount + (folder.itemCount == 1 ? " @* @Localizer.General["item"] *@" : " @* @Localizer.General["items"] *@") }}</td>
             <td class="actions one">
                 <a href="#" class="danger" v-if="folder.itemCount === 0" v-on:click.prevent="removeFolder(folder.id)"><i class="fas fa-trash"></i></a>
             </td>

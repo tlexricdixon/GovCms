@@ -1,5 +1,7 @@
 
 
+using Manager.Models.Extend;
+
 namespace CmsMvc.Areas.Admin.Models.Content;
 
 /// <summary>

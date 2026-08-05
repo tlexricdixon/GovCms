@@ -8,6 +8,7 @@
  *
  */
 
+using Manager.Manager;
 using Newtonsoft.Json;
 
 namespace Piranha.Data;

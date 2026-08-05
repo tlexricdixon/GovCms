@@ -11,7 +11,7 @@
 using Manager.Cache;
 using Manager.Contracts;
 using Manager.Manager;
-using Piranha.Services;
+using Manager.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Services;

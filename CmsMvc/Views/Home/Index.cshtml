@@ -1,4 +1,4 @@
-@model Page
+@* @model Page
 @{
     ViewData["Title"] = Model.Title;
 }
@@ -11,7 +11,7 @@
 
     @* <p>@Model.Content</p> *@
 
-    <dl>
+@*     <dl>
         <dt>Slug</dt>
         <dd>@Model.Slug</dd>
         <dt>Published</dt>
@@ -21,4 +21,4 @@
     <p class="security-note">
         Page content is Razor encoded. This view contains no <code>Html.Raw</code> call and no sanitizer package.
     </p>
-</article>
+</article> *@

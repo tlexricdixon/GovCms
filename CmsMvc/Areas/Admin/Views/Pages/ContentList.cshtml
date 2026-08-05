@@ -1,6 +1,6 @@
 @page "~/manager/content/{group}"
 @model ContentListViewModel
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@
 @{
     var contentGroup = (string)RouteData.Values["group"];
 
@@ -10,10 +10,10 @@
 
 @section script
 {
-    <script src="@Url.Content(Piranha.Manager.Editor.EditorScripts.MainScriptUrl)"></script>
+    @* <script src="@Url.Content(Piranha.Manager.Editor.EditorScripts.MainScriptUrl)"></script>
     <script src="@Url.Content(Piranha.Manager.Editor.EditorScripts.EditorScriptUrl)"></script>
     <script src="~/manager/assets/js/piranha.contentlist.min.js?v=@Piranha.Utils.GetAssemblyVersionHash(typeof(Piranha.Manager.Module).Assembly)"></script>
-
+ *@
     <script type="text/javascript">
         piranha.contentlist.load('@contentGroup');
     </script>
@@ -28,7 +28,7 @@
     <div class="top">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">@Localizer.Menu["Content"]</li>
+                @* <li class="breadcrumb-item">@Localizer.Menu["Content"]</li> *@
                 <li class="breadcrumb-item active" aria-current="@contentGroup">@contentGroup</li>
             </ol>
         </nav>
@@ -38,7 +38,7 @@
                 <div class="btn-group" role="group">
                     <button id="addContent" type="button" class="btn btn-primary btn-labeled dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-plus"></i>
-                        @Localizer.Page["Add"]
+                        @* @Localizer.Page["Add"] *@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="addContent">
                         <a class="dropdown-item" :href="piranha.baseUrl + 'manager/content/add/' + type.id" v-for="type in types">{{ type.title }}</a>
@@ -52,9 +52,9 @@
         <table class="table table-borderless">
             <thead>
             <tr>
-                <th>@Localizer.General["Title"]</th>
-                <th>@Localizer.General["Type"]</th>
-                <th>@Localizer.General["Modified"]</th>
+                <th>@* @Localizer.General["Title"] *@</th>
+                <th>@* @Localizer.General["Type"] *@</th>
+                <th>@* @Localizer.General["Modified"] *@</th>
                 <th class="actions one"></th>
             </tr>
             </thead>

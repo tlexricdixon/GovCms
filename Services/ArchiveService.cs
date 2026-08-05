@@ -8,7 +8,7 @@
  *
  */
 
-using Contracts;
+using Manager;
 using Manager.Contracts;
 using Manager.Models;
 
@@ -67,7 +67,7 @@ internal sealed class ArchiveService : IArchiveService
     /// <returns>The post archive</returns>
     public async Task<PostArchive<T>> GetByIdAsync<T>(Guid archiveId, int? currentPage = 1,
         Guid? categoryId = null, Guid? tagId = null, int? year = null, int? month = null, int? pageSize = null)
-        where T : Models.PostBase
+        where T : Manager.Models.PostBase
     {
         var model = new PostArchive<T>();
 

@@ -1,11 +1,11 @@
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@
 
 <div id="contentSettings" class="modal modal-panel fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- Header -->
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title"><i class="fas fa-cog"></i> @Localizer.General["Settings"]</h5>
+                <h5 class="modal-title"><i class="fas fa-cog"></i> @* @Localizer.General["Settings"] *@</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
             <!-- Tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li v-if="(usePrimaryImage || useExcerpt) && (useBlocks || contentRegions.length > 0)" class="nav-item">
-                    <a href="#" class="nav-link" :class="{ active: selectedSetting === 'uid-settings' }" v-on:click.prevent="selectSetting('uid-settings')">@Localizer.General["General"]</a>
+                    <a href="#" class="nav-link" :class="{ active: selectedSetting === 'uid-settings' }" v-on:click.prevent="selectSetting('uid-settings')">@* @Localizer.General["General"] *@</a>
                 </li>
                 <li class="nav-item" v-for="region in settingRegions">
                     <a href="#" class="nav-link" :class="{ active: selectedSetting === region.meta.uid }" v-on:click.prevent="selectSetting(region.meta.uid)">{{ region.meta.name }}</a>
@@ -25,7 +25,7 @@
             <div class="modal-body bg-light">
                 <div v-if="(usePrimaryImage || useExcerpt) && (useBlocks || contentRegions.length > 0)" :class="{ 'd-none': selectedSetting != 'uid-settings' }">
                     <div class="form-group" v-if="usePrimaryImage">
-                        <label>@Localizer.Content["Primary image"]</label>
+                        <label>@* @Localizer.Content["Primary image"] *@</label>
                         <div class="block image-block primary-image primary-image-modal">
                             <div class="block-body has-media-picker rounded" :class="{ empty: primaryImage.id === null }">
                                 <img class="rounded" :src="primaryImageUrl">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="form-group" v-if="useExcerpt">
-                        <label>@Localizer.Content["Excerpt"]</label>
+                        <label>@* @Localizer.Content["Excerpt"] *@</label>
                         <div v-if="useHtmlExcerpt" class="block text-block ingress" :class="{ empty: isExcerptEmpty }">
                             <div id="excerpt-toolbar" class="component-toolbar"></div>
                             <div id="excerpt-body" class="block-body html-block" contenteditable="true" v-html="excerpt" v-on:blur="onExcerptBlur">

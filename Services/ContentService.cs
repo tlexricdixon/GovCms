@@ -10,6 +10,9 @@
 
 using Manager.Cache;
 using Manager.Contracts;
+using Manager.Manager;
+using Manager.Models;
+using Manager.Models.Extend.Fields;
 using System.ComponentModel.DataAnnotations;
 
 namespace Services;
@@ -334,7 +337,7 @@ internal sealed class ContentService : IContentService
         // Initialize primary image
         if (model.PrimaryImage == null)
         {
-            model.PrimaryImage = new Extend.Fields.ImageField();
+            model.PrimaryImage = new ImageField();
         }
 
         if (model.PrimaryImage.Id.HasValue)

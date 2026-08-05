@@ -15,11 +15,11 @@
   <ItemGroup>
     <ProjectReference Include="..\CmsCore\Interfaces.csproj" />
     <ProjectReference Include="..\DbContext\DbContexts.csproj" />
-    <ProjectReference Include="..\Localization\Localization.csproj" />
     <ProjectReference Include="..\Models\Manager.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>

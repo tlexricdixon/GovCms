@@ -8,10 +8,12 @@
  *
  */
 
-namespace Piranha.Data;
+using Manager.Models;
+
+namespace Repository.Data;
 
 [Serializable]
-public sealed class MediaFolder : Models.MediaFolder
+public sealed class MediaFolder : Manager.Models.MediaFolder
 {
     /// <summary>
     /// Gets/sets the available media.

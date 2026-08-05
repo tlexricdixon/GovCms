@@ -1,5 +1,5 @@
 ﻿@* @inject IAuthorizationService Auth *@
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@
 
 <div class="modal fade" id="previewModal">
     <div class="modal-dialog modal-lg">
@@ -21,13 +21,13 @@
             <!-- Tabs -->
             <ul class="nav nav-tabs">
                 <li v-if="media.contentType !== 'application/pdf'" class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#pills-preview"><i class="far fa-eye"></i> @Localizer.General["Preview"]</a>
+                    <a class="nav-link active" data-toggle="pill" href="#pills-preview"><i class="far fa-eye"></i> @* @Localizer.General["Preview"] *@</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" :class="{ 'active': media.contentType === 'application/pdf' }" data-toggle="pill" href="#pills-details"><i class="fas fa-info-circle"></i> @Localizer.General["Details"]</a>
+                    <a class="nav-link" :class="{ 'active': media.contentType === 'application/pdf' }" data-toggle="pill" href="#pills-details"><i class="fas fa-info-circle"></i> @* @Localizer.General["Details"] *@</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#pills-meta"><i class="fas fa-th-list"></i> @Localizer.General["Meta"]</a>
+                    <a class="nav-link" data-toggle="pill" href="#pills-meta"><i class="fas fa-th-list"></i> @* @Localizer.General["Meta"] *@</a>
                 </li>
                @*  @if ((await Auth.AuthorizeAsync(User, Permission.MediaEdit)).Succeeded)
                 {
@@ -53,7 +53,7 @@
                         <template v-else-if="media.type === 'Video'">
                             <video class="d-block mx-auto mw-100" controls>
                                 <source :src="media.publicUrl" type="">
-                                @Localizer.Media["Your browser does not support the video tag."]
+                                @* @Localizer.Media["Your browser does not support the video tag."] *@
                             </video>
                         </template>
                         <template v-else-if="media.type === 'Document'">
@@ -63,9 +63,9 @@
                         </template>
                         <template v-else>
                             <div class="py-5 text-center">
-                                <h4 class="my-4">@Localizer.Media["Media preview is not available"]</h4>
-                                <a :href="media.publicUrl" class="btn btn-primary btn-labeled" target="_blank"><i class="fas fa-external-link-alt"></i>@Localizer.Media["Open media in new tab"]</a>
-                                <a :href="media.publicUrl" class="btn btn-primary btn-labeled" download><i class="fas fa-file-download"></i>@Localizer.Media["Download media"]</a>
+                                <h4 class="my-4">@* @Localizer.Media["Media preview is not available"] *@</h4>
+                                <a :href="media.publicUrl" class="btn btn-primary btn-labeled" target="_blank"><i class="fas fa-external-link-alt"></i>@* @Localizer.Media["Open media in new tab"] *@</a>
+                                <a :href="media.publicUrl" class="btn btn-primary btn-labeled" download><i class="fas fa-file-download"></i>@* @Localizer.Media["Download media"] *@</a>
                             </div>
                         </template>
                     </div>
@@ -74,42 +74,42 @@
                         <table class="table table-borderless m-0">
                             <tbody>
                                 <tr>
-                                    <th>@Localizer.General["Filename"]</th>
+                                    <th>@* @Localizer.General["Filename"] *@</th>
                                     <td>{{ media.filename }}</td>
                                 </tr>
                                 <tr>
-                                    <th>@Localizer.General["Content type"]</th>
+                                    <th>@* @Localizer.General["Content type"] *@</th>
                                     <td>{{ media.contentType }}</td>
                                 </tr>
                                 <tr>
-                                    <th>@Localizer.General["Size"]</th>
+                                    <th>@* @Localizer.General["Size"] *@</th>
                                     <td>{{ media.size }}</td>
                                 </tr>
                                 <template v-if="media.width && media.height">
                                     <tr>
-                                        <th>@Localizer.General["Dimensions"]</th>
+                                        <th>@* @Localizer.General["Dimensions"] *@</th>
                                         <td>{{ media.width }} x {{ media.height }}</td>
                                     </tr>
                                     <tr>
-                                        <th>@Localizer.General["Width"]</th>
-                                        <td>{{ media.width }} @Localizer.General["pixels"]</td>
+                                        <th>@* @Localizer.General["Width"] *@</th>
+                                        <td>{{ media.width }} @* @Localizer.General["pixels"] *@</td>
                                     </tr>
                                     <tr>
-                                        <th>@Localizer.General["Height"]</th>
-                                        <td>{{ media.height }} @Localizer.General["pixels"]</td>
+                                        <th>@* @Localizer.General["Height"] *@</th>
+                                        <td>{{ media.height }} @* @Localizer.General["pixels"] *@</td>
                                     </tr>
                                 </template>
                                 <tr>
-                                    <th>@Localizer.General["Modified"]</th>
+                                    <th>@* @Localizer.General["Modified"] *@</th>
                                     <td>{{ media.lastModified }}</td>
                                 </tr>
                                 <tr>
-                                    <th>@Localizer.General["Download"]</th>
-                                    <td><a :href="media.publicUrl" download>@Localizer.Media["Download media"]</a></td>
+                                    <th>@* @Localizer.General["Download"] *@</th>
+                                    <td><a :href="media.publicUrl" download>@* @Localizer.Media["Download media"] *@</a></td>
                                 </tr>
                                 <tr>
-                                    <th>@Localizer.General["URL"]</th>
-                                    <td><a :href="media.publicUrl" target="_blank">@Localizer.General["Open public URL in new tab"]</a></td>
+                                    <th>@* @Localizer.General["URL"] *@</th>
+                                    <td><a :href="media.publicUrl" target="_blank">@* @Localizer.General["Open public URL in new tab"] *@</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -119,15 +119,15 @@
                         <table class="table table-borderless m-0">
                             <tbody>
                                 <tr>
-                                    <th><span class="d-block mt-1">@Localizer.General["Title"]</span></th>
+                                    <th><span class="d-block mt-1">@* @Localizer.General["Title"] *@</span></th>
                                     <td><input type="text" class="form-control form-control-sm" v-model="media.title"></td>
                                 </tr>
                                 <tr>
-                                    <th><span class="d-block mt-1">@Localizer.General["Alt text"]</span></th>
+                                    <th><span class="d-block mt-1">@* @Localizer.General["Alt text"] *@</span></th>
                                     <td><input type="text" class="form-control form-control-sm" v-model="media.altText"></td>
                                 </tr>
                                 <tr>
-                                    <th><span class="d-block mt-1">@Localizer.General["Description"]</span></th>
+                                    <th><span class="d-block mt-1">@* @Localizer.General["Description"] *@</span></th>
                                     <td><textarea rows="5" class="form-control form-control-sm" v-model="media.description"></textarea></td>
                                 </tr>
                                 <tr v-for="property in media.properties">
@@ -137,7 +137,7 @@
                                 <tr>
                                     <td class="text-right" colspan="2">
                                         <button v-on:click.prevent="saveMeta(media)" class="btn btn-sm btn-success btn-labeled">
-                                            <i class="fas fa-check"></i>@Localizer.General["Save"]
+                                            <i class="fas fa-check"></i>@* @Localizer.General["Save"] *@
                                         </button>
                                     </td>
                                 </tr>
@@ -152,7 +152,7 @@
                                 <input type="hidden" name="Model.ParentId" v-model="media.folderId" />
                                 <div class="dz-message needsclick text-center">
                                     <span class="fas fa-cloud-upload-alt"></span>
-                                    @Localizer.Media["Drop files here or click to upload."]
+                                    @* @Localizer.Media["Drop files here or click to upload."] *@
                                 </div>
                                 <div class="file-list"></div>
                             </form>

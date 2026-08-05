@@ -1,4 +1,6 @@
 ﻿
+using Manager.Manager;
+
 namespace Manager.Models;
 
 /// <summary>

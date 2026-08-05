@@ -1,4 +1,4 @@
-using CmsMvc.Data;
+
 using DbContexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +13,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LocalDbContext>();
-    await CmsSeed.InitializeAsync(db);
+    //await CmsSeed.InitializeAsync(db);
 }
 if (!app.Environment.IsDevelopment())
 {
@@ -35,7 +35,7 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LocalDbContext>();
-    await CmsSeed.InitializeAsync(db);
+    //await CmsSeed.InitializeAsync(db);
 }
 
 await app.RunAsync();

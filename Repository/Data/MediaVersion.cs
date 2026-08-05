@@ -10,10 +10,10 @@
 
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
-public sealed class MediaVersion : Models.MediaVersion
+public sealed class MediaVersion : Manager.Models.MediaVersion
 {
     /// <summary>
     /// Gets/sets the id of the media this is

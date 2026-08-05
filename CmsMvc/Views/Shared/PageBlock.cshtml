@@ -1,8 +1,8 @@
-@model Piranha.Extend.Blocks.PageBlock
+@model Manager.Models.Extend.Blocks.PageBlock
 
 @if (Model.Body.Page != null)
 {
-    <div class="card">
+@*     <div class="card">
         @if (Model.Body.Page.PrimaryImage.HasValue)
         {
             <a href="@WebApp.Url(Model)">
@@ -14,5 +14,5 @@
             <p>@Html.Raw(Model.Body.Page.Excerpt)</p>
             <a href="@WebApp.Url(Model)" class="btn btn-sm btn-primary">Read more</a>
         </div>
-    </div>
+    </div> *@
 }

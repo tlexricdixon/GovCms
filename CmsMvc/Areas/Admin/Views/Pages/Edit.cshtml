@@ -2,12 +2,12 @@
 
 @{
     ViewData["Title"] = $"Edit {Model.Title}";
-    var blocks = Model.PageBlocks
-       .OrderBy(block => block.SortOrder)
-       .ThenBy(block => block.Id)
-       .ToList();
+    // var blocks = Model.PageBlocks
+    //    .OrderBy(block => block.SortOrder)
+    //    .ThenBy(block => block.Id)
+    //    .ToList();
 
-    var blockIndex = 0;
+    // var blockIndex = 0;
 }
 
 <div class="d-flex justify-content-between align-items-start mb-4">
@@ -128,7 +128,7 @@
 
 <hr class="my-5" />
 
-<section aria-labelledby="blocks-heading">
+@* <section aria-labelledby="blocks-heading">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 id="blocks-heading">Content Blocks</h2>
     </div>
@@ -245,4 +245,4 @@
             }
         </ol>
     }
-</section>
+</section> *@

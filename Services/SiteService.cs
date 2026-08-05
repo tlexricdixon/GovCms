@@ -10,6 +10,8 @@
 
 using Manager.Cache;
 using Manager.Contracts;
+using Manager.Manager;
+using Manager.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Services;
@@ -259,7 +261,7 @@ internal sealed class SiteService : ISiteService
 
         if (id != null)
         {
-            var sitemap = onlyPublished && _cache != null ? await _cache.GetAsync<Models.Sitemap>($"Sitemap_{id}").ConfigureAwait(false) : null;
+            var sitemap = onlyPublished && _cache != null ? await _cache.GetAsync<Sitemap>($"Sitemap_{id}").ConfigureAwait(false) : null;
 
             if (sitemap == null)
             {
@@ -373,9 +375,9 @@ internal sealed class SiteService : ISiteService
         Validator.ValidateObject(model, context, true);
 
         // Call hooks & save
-        App.Hooks.OnBeforeSave<Models.SiteContentBase>(model);
+        App.Hooks.OnBeforeSave<SiteContentBase>(model);
         await _repo.SaveContent(siteId, model).ConfigureAwait(false);
-        App.Hooks.OnAfterSave<Models.SiteContentBase>(model);
+        App.Hooks.OnAfterSave<SiteContentBase>(model);
 
         // Remove from cache
         await RemoveContentFromCache(model).ConfigureAwait(false);
@@ -385,7 +387,7 @@ internal sealed class SiteService : ISiteService
     /// Creates and initializes a new site content model of the specified type.
     /// </summary>
     /// <returns>The created site content</returns>
-    public Task<T> CreateContentAsync<T>(string typeId = null) where T : Models.SiteContentBase
+    public Task<T> CreateContentAsync<T>(string typeId = null) where T : SiteContentBase
     {
         if (string.IsNullOrEmpty(typeId))
         {
@@ -503,7 +505,7 @@ internal sealed class SiteService : ISiteService
     /// Processes the model on load.
     /// </summary>
     /// <param name="model">The model</param>
-    private async Task OnLoadContentAsync(Models.SiteContentBase model)
+    private async Task OnLoadContentAsync(SiteContentBase model)
     {
         if (model != null)
         {
@@ -549,7 +551,7 @@ internal sealed class SiteService : ISiteService
     /// Removes the given model from cache.
     /// </summary>
     /// <param name="model">The model</param>
-    private async Task RemoveContentFromCache<T>(T model) where T : Models.SiteContentBase
+    private async Task RemoveContentFromCache<T>(T model) where T : SiteContentBase
     {
         if (_cache != null)
         {

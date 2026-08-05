@@ -1,3 +1,5 @@
+using Manager.Models;
+
 namespace Manager.Contracts;
 
 public interface IContentFactory

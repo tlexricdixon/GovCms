@@ -9,13 +9,11 @@
  */
 
 using Manager.Contracts;
+using Manager.Models.Extend;
 using System.Dynamic;
 
 namespace Manager.Models;
 
-/// <summary>
-/// Dynamic content model.
-/// </summary>
 [Serializable]
 public class DynamicContent : Content<DynamicContent>, IDynamicContent, ICategorizedContent, ITaggedContent, IBlockContent
 {
@@ -37,5 +35,6 @@ public class DynamicContent : Content<DynamicContent>, IDynamicContent, ICategor
     /// <summary>
     /// Gets/sets the blocks.
     /// </summary>
-    public IList<Extend.Block> Blocks { get; set; } = new List<Extend.Block>();
+    public IList<Block> Blocks { get; set; } = new List<Block>();
 }
+

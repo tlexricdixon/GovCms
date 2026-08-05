@@ -1,5 +1,10 @@
 ﻿using Manager.Contracts;
-using Manager.Models;
+using Manager.Models.Extend;
+using Manager.Models.Extend.Blocks;
+using Manager.Models.Extend.Fields;
+using Manager.Models.Extend.Serializers;
+using Manager.Runtime;
+using Manager.Security;
 using Newtonsoft.Json;
 using System.Reflection;
 
@@ -194,60 +199,60 @@ public sealed class App
         Instance._mediaTypes.Audio.Add(".wav", "audio/wav");
 
         // Compose field types
-        Instance._fields.Register<Extend.Fields.ArchivePageField>();
-        Instance._fields.Register<Extend.Fields.AudioField>();
-        Instance._fields.Register<Extend.Fields.CheckBoxField>();
-        Instance._fields.Register<Extend.Fields.ColorField>();
-        Instance._fields.Register<Extend.Fields.ContentField>();
-        Instance._fields.Register<Extend.Fields.DateField>();
-        Instance._fields.Register<Extend.Fields.DocumentField>();
-        Instance._fields.Register<Extend.Fields.HtmlField>();
-        Instance._fields.Register<Extend.Fields.ImageField>();
-        Instance._fields.Register<Extend.Fields.MarkdownField>();
-        Instance._fields.Register<Extend.Fields.MediaField>();
-        Instance._fields.Register<Extend.Fields.NumberField>();
-        Instance._fields.Register<Extend.Fields.PageField>();
-        Instance._fields.Register<Extend.Fields.PostField>();
-        Instance._fields.Register<Extend.Fields.ReadonlyField>();
-        Instance._fields.Register<Extend.Fields.StringField>();
-        Instance._fields.Register<Extend.Fields.TextField>();
-        Instance._fields.Register<Extend.Fields.VideoField>();
+        Instance._fields.Register<ArchivePageField>();
+        Instance._fields.Register<AudioField>();
+        Instance._fields.Register<CheckBoxField>();
+        Instance._fields.Register<ColorField>();
+        Instance._fields.Register<ContentField>();
+        Instance._fields.Register<DateField>();
+        Instance._fields.Register<DocumentField>();
+        Instance._fields.Register<HtmlField>();
+        Instance._fields.Register<ImageField>();
+        Instance._fields.Register<MarkdownField>();
+        Instance._fields.Register<MediaField>();
+        Instance._fields.Register<NumberField>();
+        Instance._fields.Register<PageField>();
+        Instance._fields.Register<PostField>();
+        Instance._fields.Register<ReadonlyField>();
+        Instance._fields.Register<StringField>();
+        Instance._fields.Register<TextField>();
+        Instance._fields.Register<VideoField>();
 
         // Compose select field types
-        Instance._fields.RegisterSelect<Extend.Blocks.ImageAspect>();
+        Instance._fields.RegisterSelect<ImageAspect>();
 
         // Compose block types
-        Instance._blocks.Register<Extend.Blocks.AudioBlock>();
-        Instance._blocks.Register<Extend.Blocks.ColumnBlock>();
-        Instance._blocks.Register<Extend.Blocks.ContentBlock>();
-        Instance._blocks.Register<Extend.Blocks.HtmlBlock>();
-        Instance._blocks.Register<Extend.Blocks.ImageBlock>();
-        Instance._blocks.Register<Extend.Blocks.ImageGalleryBlock>();
-        Instance._blocks.Register<Extend.Blocks.MarkdownBlock>();
-        Instance._blocks.Register<Extend.Blocks.PageBlock>();
-        Instance._blocks.Register<Extend.Blocks.PostBlock>();
-        Instance._blocks.Register<Extend.Blocks.QuoteBlock>();
-        Instance._blocks.Register<Extend.Blocks.SeparatorBlock>();
-        Instance._blocks.Register<Extend.Blocks.TextBlock>();
-        Instance._blocks.Register<Extend.Blocks.VideoBlock>();
+        Instance._blocks.Register<AudioBlock>();
+        Instance._blocks.Register<ColumnBlock>();
+        Instance._blocks.Register<ContentBlock>();
+        Instance._blocks.Register<HtmlBlock>();
+        Instance._blocks.Register<ImageBlock>();
+        Instance._blocks.Register<ImageGalleryBlock>();
+        Instance._blocks.Register<MarkdownBlock>();
+        Instance._blocks.Register<PageBlock>();
+        Instance._blocks.Register<PostBlock>();
+        Instance._blocks.Register<QuoteBlock>();
+        Instance._blocks.Register<SeparatorBlock>();
+        Instance._blocks.Register<TextBlock>();
+        Instance._blocks.Register<VideoBlock>();
 
         // Compose serializers
-        Instance._serializers.Register<Extend.Fields.CheckBoxField>(new CheckBoxFieldSerializer<Extend.Fields.CheckBoxField>());
-        Instance._serializers.Register<Extend.Fields.ColorField>(new StringFieldSerializer<Extend.Fields.ColorField>());
-        Instance._serializers.Register<Extend.Fields.ContentField>(new ContentFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.DateField>(new DateFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.DocumentField>(new DocumentFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.HtmlField>(new StringFieldSerializer<Extend.Fields.HtmlField>());
-        Instance._serializers.Register<Extend.Fields.MarkdownField>(new StringFieldSerializer<Extend.Fields.MarkdownField>());
-        Instance._serializers.Register<Extend.Fields.MediaField>(new MediaFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.NumberField>(new IntegerFieldSerializer<Extend.Fields.NumberField>());
-        Instance._serializers.Register<Extend.Fields.PageField>(new PageFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.PostField>(new PostFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.StringField>(new StringFieldSerializer<Extend.Fields.StringField>());
-        Instance._serializers.Register<Extend.Fields.TextField>(new StringFieldSerializer<Extend.Fields.TextField>());
-        Instance._serializers.Register<Extend.Fields.ImageField>(new ImageFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.VideoField>(new VideoFieldSerializer());
-        Instance._serializers.Register<Extend.Fields.AudioField>(new AudioFieldSerializer());
+        Instance._serializers.Register<CheckBoxField>(new CheckBoxFieldSerializer<CheckBoxField>());
+        Instance._serializers.Register<ColorField>(new StringFieldSerializer<ColorField>());
+        Instance._serializers.Register<ContentField>(new ContentFieldSerializer());
+        Instance._serializers.Register<DateField>(new DateFieldSerializer());
+        Instance._serializers.Register<DocumentField>(new DocumentFieldSerializer());
+        Instance._serializers.Register<HtmlField>(new StringFieldSerializer<HtmlField>());
+        Instance._serializers.Register<MarkdownField>(new StringFieldSerializer<MarkdownField>());
+        Instance._serializers.Register<MediaField>(new MediaFieldSerializer());
+        Instance._serializers.Register<NumberField>(new IntegerFieldSerializer<NumberField>());
+        Instance._serializers.Register<PageField>(new PageFieldSerializer());
+        Instance._serializers.Register<PostField>(new PostFieldSerializer());
+        Instance._serializers.Register<StringField>(new StringFieldSerializer<StringField>());
+        Instance._serializers.Register<TextField>(new StringFieldSerializer<TextField>());
+        Instance._serializers.Register<ImageField>(new ImageFieldSerializer());
+        Instance._serializers.Register<VideoField>(new VideoFieldSerializer());
+        Instance._serializers.Register<AudioField>(new AudioFieldSerializer());
 
         // Create markdown converter
         Instance._markdown = new DefaultMarkdown();
@@ -279,11 +284,11 @@ public sealed class App
         _serializers = new();
         _hooks = new();
         _permissions = new();
-        _contentGroups = [];
-        _contentTypes = [];
-        _pageTypes = [];
-        _postTypes = [];
-        _siteTypes = [];
+        _contentGroups = new();
+        _contentTypes = new();
+        _pageTypes = new();
+        _postTypes = new();
+        _siteTypes = new();
     }
 
     /// <summary>

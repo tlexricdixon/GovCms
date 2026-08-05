@@ -9,6 +9,7 @@
  */
 
 using CmsMvc.Areas.Admin.Models.Content;
+using Manager.Models;
 
 namespace CmsMvc.Areas.Admin.Models;
 
