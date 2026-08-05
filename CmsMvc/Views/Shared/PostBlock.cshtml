@@ -1,8 +1,8 @@
-@model Piranha.Extend.Blocks.PostBlock
+@model Manager.Models.Extend.Blocks.PostBlock
 
 @if (Model.Body.Post != null)
 {
-    <div class="card">
+@*     <div class="card">
         @if (Model.Body.Post.PrimaryImage.HasValue)
         {
             <a href="@WebApp.Url(Model)">
@@ -14,5 +14,5 @@
             <p>@Html.Raw(Model.Body.Post.Excerpt)</p>
             <a href="@WebApp.Url(Model)" class="btn btn-sm btn-primary">Read more</a>
         </div>
-    </div>
+    </div> *@
 }

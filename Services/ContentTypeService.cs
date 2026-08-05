@@ -10,6 +10,8 @@
 
 using Manager.Cache;
 using Manager.Contracts;
+using Manager.Manager;
+using Manager.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Services;

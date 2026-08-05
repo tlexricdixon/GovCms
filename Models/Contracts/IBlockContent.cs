@@ -1,5 +1,6 @@
 
 using Manager.Models;
+using Manager.Models.Extend;
 
 namespace Manager.Contracts;
 

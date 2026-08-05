@@ -10,10 +10,10 @@
 
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
-public sealed class Media : Models.MediaBase
+public sealed class Media : Manager.Models.MediaBase
 {
     /// <summary>
     /// Gets/sets the user defined properties serialized as JSON.
@@ -30,9 +30,9 @@ public sealed class Media : Models.MediaBase
     /// </summary>
     public IList<MediaVersion> Versions { get; set; } = new List<MediaVersion>();
 
-    public static implicit operator Models.Media(Data.Media m)
+    public static implicit operator Manager.Models.Media(Media m)
     {
-        return m == null? null : new Models.Media
+        return m == null? null : new Manager.Models.Media
         {
             Id = m.Id,
             FolderId = m.FolderId,
@@ -48,7 +48,7 @@ public sealed class Media : Models.MediaBase
             Height = m.Height,
             Created = m.Created,
             LastModified = m.LastModified,
-            Versions = m.Versions.Select(v => new Models.MediaVersion
+            Versions = m.Versions.Select(v => new Manager.Models.MediaVersion
             {
                 Id = v.Id,
                 Size = v.Size,
@@ -59,7 +59,7 @@ public sealed class Media : Models.MediaBase
         };
     }
 
-    public static implicit operator Media(Models.Media m)
+    public static implicit operator Media(Manager.Models.Media m)
     {
         return new Media
         {

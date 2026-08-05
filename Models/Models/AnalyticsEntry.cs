@@ -1,7 +1,7 @@
 ﻿namespace Manager.Models;
 
 [Serializable]
-public abstract class AnalyticsEntry : SyncEntity
+public abstract class AnalyticsEntry //: SyncEntity
 {
     public DateTime Timestamp { get; set; }
     public string? PageVisited { get; set; }

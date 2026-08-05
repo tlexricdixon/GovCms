@@ -1,4 +1,7 @@
 ﻿using Manager.Models;
+using Manager.Models.Extend;
+using Manager.Models.Extend.Fields;
+using Manager.Runtime;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Globalization;
@@ -801,7 +804,7 @@ public static class Utils
     /// </summary>
     /// <param name="md">The field</param>
     /// <returns>The first paragraph</returns>
-    public static string FirstParagraph(Extend.Fields.MarkdownField md)
+    public static string FirstParagraph(MarkdownField md)
     {
         Regex reg = new Regex("<p[^>]*>.*?</p>");
         var matches = reg.Matches(md.ToHtml());
@@ -814,7 +817,7 @@ public static class Utils
     /// </summary>
     /// <param name="html">The field</param>
     /// <returns>The first paragraph</returns>
-    public static string FirstParagraph(Extend.Fields.HtmlField html)
+    public static string FirstParagraph(HtmlField html)
     {
         Regex reg = new Regex("<p[^>]*>.*?</p>");
         var matches = reg.Matches(html.Value);

@@ -11,6 +11,7 @@
 using Manager.Contracts;
 using Manager.Manager;
 using Manager.Models;
+using Manager.Models.Extend;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
 using System.Dynamic;
@@ -365,9 +366,9 @@ internal sealed class ContentFactory : IContentFactory
                 {
                     await InitBlockAsync(scope, block, managerInit).ConfigureAwait(false);
 
-                    if (block is Extend.BlockGroup)
+                    if (block is BlockGroup)
                     {
-                        foreach (var child in ((Extend.BlockGroup)block).Items)
+                        foreach (var child in ((BlockGroup)block).Items)
                         {
                             await InitBlockAsync(scope, child, managerInit).ConfigureAwait(false);
                         }
@@ -450,7 +451,7 @@ internal sealed class ContentFactory : IContentFactory
     /// <param name="scope">The current service scope</param>
     /// <param name="block">The block</param>
     /// <param name="managerInit">If this is initialization used by the manager</param>
-    private async Task InitBlockAsync(IServiceScope scope, Extend.Block block, bool managerInit)
+    private async Task InitBlockAsync(IServiceScope scope, Block block, bool managerInit)
     {
         if (block != null)
         {
@@ -459,7 +460,7 @@ internal sealed class ContentFactory : IContentFactory
             // Initialize all of the fields
             foreach (var property in properties)
             {
-                if (typeof(Extend.IField).IsAssignableFrom(property.PropertyType))
+                if (typeof(IField).IsAssignableFrom(property.PropertyType))
                 {
                     var field = property.GetValue(block);
 

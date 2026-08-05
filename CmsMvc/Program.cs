@@ -1,5 +1,7 @@
-using CmsMvc.Data;
+
+using CmsMvc.Services;
 using DbContexts;
+using Localization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,12 +10,17 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<LocalDbContext>(options =>
     options.UseAzureSql(
         builder.Configuration.GetConnectionString("CmsDatabase")));
+// Add localization services
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddScoped<ManagerLocalizer>();
+// Register HTML sanitization service
+builder.Services.AddScoped<IHtmlSanitizer, HtmlSanitizationService>();
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LocalDbContext>();
-    await CmsSeed.InitializeAsync(db);
+    //await CmsSeed.InitializeAsync(db);
 }
 if (!app.Environment.IsDevelopment())
 {
@@ -35,7 +42,7 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LocalDbContext>();
-    await CmsSeed.InitializeAsync(db);
+    //await CmsSeed.InitializeAsync(db);
 }
 
 await app.RunAsync();

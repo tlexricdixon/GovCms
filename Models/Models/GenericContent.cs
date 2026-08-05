@@ -1,4 +1,6 @@
 
+using Manager.Models.Extend.Fields;
+
 namespace Manager.Models;
 
 /// <summary>

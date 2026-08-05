@@ -1,4 +1,4 @@
-﻿@model CmsModels.PageBlock
+﻿@* @model Manager.Models.Extend.Blocks.LinkBlock
 
 @if (!string.IsNullOrWhiteSpace(Model.LinkUrl) &&
      !string.IsNullOrWhiteSpace(Model.LinkText))
@@ -7,4 +7,4 @@
        target="@(Model.OpenInNewWindow ? "_blank" : null)">
         @Model.LinkText
     </a>
-}
+} *@

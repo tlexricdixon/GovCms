@@ -1,11 +1,18 @@
-﻿using Manager.Contracts;
+/*
+ * Copyright (c) .NET Foundation and Contributors
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ *
+ * https://github.com/piranhacms/piranha.core
+ *
+ */
+
+using Manager.Contracts;
 using System.ComponentModel.DataAnnotations;
 
 namespace Manager.Models;
 
-/// <summary>
-/// Base class for templated content types.
-/// </summary>
 [Serializable]
 public abstract class ContentTypeBase : ITypeModel
 {
@@ -47,3 +54,4 @@ public abstract class ContentTypeBase : ITypeModel
     /// </summary>
     public IList<ContentTypeEditor> CustomEditors { get; set; } = new List<ContentTypeEditor>();
 }
+

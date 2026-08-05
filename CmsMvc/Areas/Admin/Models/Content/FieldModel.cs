@@ -1,5 +1,7 @@
 
 
+using Manager.Contracts;
+
 namespace CmsMvc.Areas.Admin.Models.Content;
 
 /// <summary>

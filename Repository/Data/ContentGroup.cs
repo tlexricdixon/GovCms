@@ -8,10 +8,10 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
-public sealed class ContentGroup : Models.ContentGroup
+public sealed class ContentGroup : Manager.Models.ContentGroup
 {
     /// <summary>
     /// Gets/sets the created date.

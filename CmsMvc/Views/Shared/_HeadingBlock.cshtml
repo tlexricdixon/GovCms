@@ -1,4 +1,4 @@
-﻿@model CmsModels.Page
+﻿@* @model CmsModels.Page
 
 @foreach (var block in Model.PageBlocks.OrderBy(block => block.SortOrder))
 {
@@ -16,4 +16,4 @@
             <partial name="Blocks/_LinkBlock" model="block" />
             break;
     }
-}
+} *@

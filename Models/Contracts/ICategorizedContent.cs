@@ -1,4 +1,6 @@
 
+using Manager.Models;
+
 namespace Manager.Contracts;
 
 /// <summary>

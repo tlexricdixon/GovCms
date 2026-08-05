@@ -1,36 +1,36 @@
 @page "~/manager/media/{folderId?}"
 @model MediaListViewModel
 @inject IAuthorizationService Auth
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@
 @{
     ViewBag.MenuItem = "Media";
     var folderId = @RouteData.Values["folderId"];
 }
 @section script
 {
-    <script src="~/manager/assets/js/piranha.media.min.js?v=@Piranha.Utils.GetAssemblyVersionHash(typeof(Piranha.Manager.Module).Assembly)"></script>
+    @* <script src="~/manager/assets/js/piranha.media.min.js?v=@Piranha.Utils.GetAssemblyVersionHash(typeof(Piranha.Manager.Module).Assembly)"></script>
 
     <script>
         piranha.permissions.load(function () {
             piranha.media.load("@folderId", true);
         });
-    </script>
+    </script> *@
 }
 <div id="media">
     <div class="top">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item">@Localizer.Menu["Content"]</li>
-                <li class="breadcrumb-item active" aria-current="page">@Localizer.Menu["Media"]</li>
+                @* <li class="breadcrumb-item">@Localizer.Menu["Content"]</li> *@
+                @* <li class="breadcrumb-item active" aria-current="page">@Localizer.Menu["Media"]</li> *@
             </ol>
         </nav>
 
         <div v-if="!loading" class="container-fluid">
             <div class="top-nav">
-                @foreach (var action in Piranha.Manager.Actions.Toolbars.MediaList)
+@*                 @foreach (var action in Piranha.Manager.Actions.Toolbars.MediaList)
                 {
                     <partial name="@action.ActionView" />
-                }
+                } *@
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                         <ol class="folders dd-list">
                             <li class="droppable" :class="{ active: currentFolderId === null }" v-on:dragover="dragover" v-on:dragleave="dragleave" v-on:drop="drop($event, null)">
                                 <a v-on:click.prevent="load()" href="#">
-                                    <i class="fas fa-hdd"></i>@Localizer.Media["Media"]
+                                    @* <i class="fas fa-hdd"></i>@Localizer.Media["Media"] *@
                                     <span class="badge badge-light float-right">{{ rootCount }}</span>
                                 </a>
                                 <ol v-if="currentFolderId === null && isAdding" class="dd-list">
@@ -78,10 +78,10 @@
                             <i class="fas fa-list"></i>
                         </button>
                         <button class="btn btn-sm btn-danger ml-auto" v-show="hasSelection" v-on:click="removeSelection()">
-                            <i class="fas fa-trash"></i> @Localizer.Media["Delete selected media"]
+                            @* <i class="fas fa-trash"></i> @Localizer.Media["Delete selected media"] *@
                         </button>
                     </div>
-                    @if ((await Auth.AuthorizeAsync(User, Permission.MediaAdd)).Succeeded)
+                    @* @if ((await Auth.AuthorizeAsync(User, Permission.MediaAdd)).Succeeded)
                     {
                         <div id="media-upload-container" class="dropzone-container mb-3">
                             <form action="@Url.Action("Upload", "MediaApi")" class="dropzone needsclick dz-clickable" enctype="multipart/form-data">
@@ -94,7 +94,7 @@
                             </form>
                             <ul class="media-list list-unstyled"></ul>
                         </div>
-                    }
+                    } *@
 
                     <partial name="Partial/_MediaGallery" />
                     <partial name="Partial/_MediaList" />

@@ -8,8 +8,13 @@
  *
  */
 
+using Manager;
 using Manager.Cache;
 using Manager.Contracts;
+using Manager.Manager;
+using Manager.Models;
+using Manager.Models.Extend;
+using Manager.Models.Extend.Fields;
 using System.ComponentModel.DataAnnotations;
 
 namespace Services;
@@ -54,7 +59,7 @@ internal sealed class PageService : IPageService
     /// Creates and initializes a new page of the specified type.
     /// </summary>
     /// <returns>The created page</returns>
-    public async Task<T> CreateAsync<T>(string typeId = null) where T : Models.PageBase
+    public async Task<T> CreateAsync<T>(string typeId = null) where T : PageBase
     {
         if (string.IsNullOrEmpty(typeId))
         {
@@ -82,7 +87,7 @@ internal sealed class PageService : IPageService
     /// </summary>
     /// <param name="originalPage">The orginal page</param>
     /// <returns>The created copy</returns>
-    public async Task<T> CopyAsync<T>(T originalPage) where T : Models.PageBase
+    public async Task<T> CopyAsync<T>(T originalPage) where T : PageBase
     {
         var model = await GetByIdAsync<T>(originalPage.Id).ConfigureAwait(false);
 
@@ -101,7 +106,7 @@ internal sealed class PageService : IPageService
     /// Detaches a copy and initializes it as a standalone page
     /// </summary>
     /// <returns>The standalone page</returns>
-    public async Task DetachAsync<T>(T model) where T : Models.PageBase
+    public async Task DetachAsync<T>(T model) where T : PageBase
     {
         if (!model.OriginalPageId.HasValue)
         {
@@ -117,9 +122,9 @@ internal sealed class PageService : IPageService
         {
             pageBlock.Id = Guid.Empty;
 
-            if (pageBlock is Extend.BlockGroup)
+            if (pageBlock is BlockGroup)
             {
-                foreach (var childBlock in ((Extend.BlockGroup)pageBlock).Items)
+                foreach (var childBlock in ((BlockGroup)pageBlock).Items)
                 {
                     childBlock.Id = Guid.Empty;
                 }
@@ -175,7 +180,7 @@ internal sealed class PageService : IPageService
     /// </summary>
     /// <param name="siteId">The optional site id</param>
     /// <returns>The pages</returns>
-    public async Task<IEnumerable<T>> GetAllBlogsAsync<T>(Guid? siteId = null) where T : Models.PageBase
+    public async Task<IEnumerable<T>> GetAllBlogsAsync<T>(Guid? siteId = null) where T : PageBase
     {
         var models = new List<T>();
         var pages = await _repo.GetAllBlogs(await EnsureSiteIdAsync(siteId).ConfigureAwait(false))
@@ -249,12 +254,12 @@ internal sealed class PageService : IPageService
     /// <typeparam name="T">The model type</typeparam>
     /// <param name="siteId">The optional site id</param>
     /// <returns>The page model</returns>
-    public async Task<T> GetStartpageAsync<T>(Guid? siteId = null) where T : Models.PageBase
+    public async Task<T> GetStartpageAsync<T>(Guid? siteId = null) where T : PageBase
     {
         siteId = await EnsureSiteIdAsync(siteId).ConfigureAwait(false);
         PageBase model = null;
 
-        if (typeof(T) == typeof(Models.PageInfo))
+        if (typeof(T) == typeof(PageInfo))
         {
             if (_cache != null)
             {
@@ -323,7 +328,7 @@ internal sealed class PageService : IPageService
         {
             PageBase model = null;
 
-            if (typeof(T) == typeof(Models.PageInfo))
+            if (typeof(T) == typeof(PageInfo))
             {
                 if (_cache != null)
                 {
@@ -399,7 +404,7 @@ internal sealed class PageService : IPageService
     /// <param name="slug">The unique slug</param>
     /// <param name="siteId">The optional site id</param>
     /// <returns>The page model</returns>
-    public async Task<T> GetBySlugAsync<T>(string slug, Guid? siteId = null) where T : Models.PageBase
+    public async Task<T> GetBySlugAsync<T>(string slug, Guid? siteId = null) where T :PageBase
     {
         siteId = await EnsureSiteIdAsync(siteId).ConfigureAwait(false);
         PageBase model = null;
@@ -409,7 +414,7 @@ internal sealed class PageService : IPageService
 
         if (pageId.HasValue)
         {
-            if (typeof(T) == typeof(Models.PageInfo))
+            if (typeof(T) == typeof(PageInfo))   
             {
                 if (_cache != null)
                 {
@@ -501,7 +506,7 @@ internal sealed class PageService : IPageService
     /// <param name="model">The page to move</param>
     /// <param name="parentId">The new parent id</param>
     /// <param name="sortOrder">The new sort order</param>
-    public async Task MoveAsync<T>(T model, Guid? parentId, int sortOrder) where T : Models.PageBase
+    public async Task MoveAsync<T>(T model, Guid? parentId, int sortOrder) where T : PageBase
     {
         // Call hooks & save
         App.Hooks.OnBeforeSave<PageBase>(model);
@@ -840,7 +845,7 @@ internal sealed class PageService : IPageService
     /// Deletes the given model.
     /// </summary>
     /// <param name="model">The model</param>
-    public async Task DeleteAsync<T>(T model) where T : Models.PageBase
+    public async Task DeleteAsync<T>(T model) where T : PageBase
     {
         // Call hooks & save
         App.Hooks.OnBeforeDelete<PageBase>(model);
@@ -995,7 +1000,7 @@ internal sealed class PageService : IPageService
             // Initialize primary image
             if (model.PrimaryImage == null)
             {
-                model.PrimaryImage = new Extend.Fields.ImageField();
+                model.PrimaryImage = new ImageField();
             }
 
             if (model.PrimaryImage.Id.HasValue)
@@ -1006,7 +1011,7 @@ internal sealed class PageService : IPageService
             // Initialize og image
             if (model.OgImage == null)
             {
-                model.OgImage = new Extend.Fields.ImageField();
+                model.OgImage = new ImageField();
             }
 
             if (model.OgImage.Id.HasValue)

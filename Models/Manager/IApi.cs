@@ -74,3 +74,4 @@ public interface IApi : IDisposable
     /// </summary>
     ISiteTypeService SiteTypes { get; }
 }
+

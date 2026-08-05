@@ -1,5 +1,4 @@
-﻿using Localization;
-using Manager.Models;
+﻿using Manager.Models;
 
 namespace Manager.Contracts;
 

@@ -1,4 +1,4 @@
-@inject ManagerLocalizer Localizer
+@* @inject ManagerLocalizer Localizer *@    
 
 <div v-if="!listView" class="gallery gallery-sm">
     <a href="#" class="thumbnail droppable" v-if="currentFolderId != null" v-on:click.prevent="load(parentFolderId)" v-on:dragover="dragover" v-on:dragleave="dragleave" v-on:drop="drop($event, parentFolderId)">

@@ -1,5 +1,7 @@
 
 
+using Manager.Models.Extend.Fields;
+
 namespace Manager.Contracts;
 
 public interface IMeta

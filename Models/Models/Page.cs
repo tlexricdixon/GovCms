@@ -1,11 +1,16 @@
-﻿namespace Manager.Models
-{
-    public class Page : SyncEntity
-    {
-        public string Title { get; set; } = string.Empty;
-        public string Slug { get; set; } = string.Empty;
-        public bool IsPublished { get; set; }
-        public DateTime? PublishedAt { get; set; }
-        public ICollection<PageBlock> PageBlocks { get; set; } = new List<PageBlock>();
-    }
-}
+﻿/*
+ * Copyright (c) .NET Foundation and Contributors
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ *
+ * https://github.com/piranhacms/piranha.core
+ *
+ */
+
+using Manager.Models;
+
+namespace Manager.Models;
+
+[Serializable]
+public class Page<T> : GenericPage<T> where T : Page<T> { }

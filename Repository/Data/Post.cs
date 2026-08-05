@@ -8,6 +8,8 @@
  *
  */
 
+using Manager.Models;
+
 namespace Piranha.Data;
 
 [Serializable]
@@ -49,7 +51,7 @@ public sealed class Post : RoutedContentBase<PostField>
     /// Gets/sets the redirect type.
     /// </summary>
     /// <returns></returns>
-    public Models.RedirectType RedirectType { get; set; }
+    public RedirectType RedirectType { get; set; }
 
     /// <summary>
     /// Gets/sets if comments should be enabled.

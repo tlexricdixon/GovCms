@@ -1,11 +1,18 @@
+/*
+ * Copyright (c) .NET Foundation and Contributors
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ *
+ * https://github.com/piranhacms/piranha.core
+ *
+ */
+
 using Manager.Contracts;
 using System.ComponentModel.DataAnnotations;
 
 namespace Manager.Models;
 
-/// <summary>
-/// Class for defining a content group.
-/// </summary>
 [Serializable]
 public class ContentGroup : ITypeModel
 {
@@ -41,3 +48,4 @@ public class ContentGroup : ITypeModel
     /// </summary>
     public bool IsHidden { get; set; }
 }
+

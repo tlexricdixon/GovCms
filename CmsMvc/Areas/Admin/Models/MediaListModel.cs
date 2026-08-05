@@ -1,5 +1,7 @@
 
 
+using Manager.Models;
+
 namespace CmsMvc.Areas.Admin.Models;
 
 /// <summary>
@@ -155,7 +157,7 @@ public class MediaListModel
     /// <summary>
     /// Gets/sets the media folder structure.
     /// </summary>
-    public Piranha.Models.MediaStructure Structure { get; set; }
+    public MediaStructure Structure { get; set; }
 
     /// <summary>
     /// Gets/sets the media folder structure.

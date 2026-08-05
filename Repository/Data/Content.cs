@@ -8,6 +8,8 @@
  *
  */
 
+using Manager.Models;
+
 namespace Piranha.Data;
 
 [Serializable]
@@ -72,7 +74,7 @@ public sealed class Content : ContentBase<ContentField>, ICategorized, ITranslat
     /// <param name="model">The model</param>
     public void SetTranslation(Guid parentId, Guid languageId, object model)
     {
-        if (model is Models.GenericContent content)
+        if (model is GenericContent content)
         {
             var translation = Translations.FirstOrDefault(t => t.LanguageId == languageId);
 

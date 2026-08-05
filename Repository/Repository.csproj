@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Localization\Localization.csproj" />
+    <ProjectReference Include="..\Models\Manager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

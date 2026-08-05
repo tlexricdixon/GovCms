@@ -8,6 +8,8 @@
  *
  */
 
+using Manager.Models;
+
 namespace Piranha.Data;
 
 [Serializable]
@@ -72,7 +74,7 @@ public sealed class Page : RoutedContentBase<PageField>
     /// Gets/sets the redirect type.
     /// </summary>
     /// <returns></returns>
-    public Models.RedirectType RedirectType { get; set; } = Models.RedirectType.Temporary;
+    public RedirectType RedirectType { get; set; } = RedirectType.Temporary;
 
     /// <summary>
     /// Gets/sets if comments should be enabled.
