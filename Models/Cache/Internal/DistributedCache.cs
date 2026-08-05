@@ -8,9 +8,6 @@
  *
  */
 
-using Microsoft.Extensions.Caching.Distributed;
-using Newtonsoft.Json;
-
 namespace Manager.Cache.Internal;
 
 /// <inheritdoc />
