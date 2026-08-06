@@ -10,7 +10,7 @@
 
 using Manager.Models;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
 public sealed class SiteField : ContentFieldBase

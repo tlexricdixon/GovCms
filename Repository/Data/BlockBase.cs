@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 /// <summary>
 /// Abstract base class for all content blocks

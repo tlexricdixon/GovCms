@@ -10,7 +10,7 @@
 
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
 public sealed class Category : TaxonomyBase

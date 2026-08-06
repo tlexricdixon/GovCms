@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) .NET Foundation and Contributors
  *
  * This software may be modified and distributed under the terms
@@ -10,7 +10,7 @@
 
 using Manager.Cache;
 using Manager.Contracts;
-using Manager.Manager;
+using Manager;
 using Manager.Models;
 using System.ComponentModel.DataAnnotations;
 

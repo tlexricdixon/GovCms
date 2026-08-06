@@ -1,67 +1,70 @@
-﻿@* @model IReadOnlyList<CmsModels.Page> *@
+@model IReadOnlyList<PageListItemViewModel>
 
 @{
     ViewData["Title"] = "Pages";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="admin-page-heading">
     <div>
+        <p class="admin-eyebrow">Content</p>
         <h1>Pages</h1>
-        <p class="text-muted mb-0">
-            Create and manage website pages.
-        </p>
+        <p>Create, review, and publish pages for the public website.</p>
     </div>
-
-    <a asp-area="Admin"
-       asp-controller="Pages"
-       asp-action="Create"
-       class="btn btn-primary">
-        Create Page
+    <a asp-area="Admin" asp-controller="Pages" asp-action="Create" class="btn admin-btn-primary">
+        <span aria-hidden="true">＋</span> Create page
     </a>
 </div>
 
-@if (Model.Count == 0)
-{
-    <div class="alert alert-info">
-        No pages have been created yet.
+<section class="admin-panel" aria-labelledby="pages-heading">
+    <div class="admin-panel-heading">
+        <div>
+            <h2 id="pages-heading">All pages</h2>
+            <p>@Model.Count @(Model.Count == 1 ? "page" : "pages")</p>
+        </div>
     </div>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Slug</th>
-                <th scope="col">Status</th>
-                <th scope="col">Modified</th>
-                <th scope="col">
-                    <span class="visually-hidden">Actions</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pages in Model)
-            {
-                <tr>
-                    <td>@pages.Title</td>
-                    <td>
-                        <code>@pages.Slug</code>
-                    </td>
-                    <td>
-                        @(pages.IsPublished ? "Published" : "Draft")
-                    </td>
-                    <td>@pages.LastModified.ToLocalTime()</td>
-                    <td class="text-end">
-                        <a asp-area="Admin"
-                           asp-controller="Pages"
-                           asp-action="Edit"
-                           asp-route-id="@pages.Id">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+
+    @if (Model.Count == 0)
+    {
+        <div class="admin-empty-state">
+            <span class="admin-empty-icon" aria-hidden="true">▤</span>
+            <h3>No pages yet</h3>
+            <p>Create your first draft, then build it with content blocks.</p>
+            <a asp-area="Admin" asp-controller="Pages" asp-action="Create" class="btn admin-btn-primary">Create your first page</a>
+        </div>
+    }
+    else
+    {
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Page</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Last modified</th>
+                        <th scope="col"><span class="visually-hidden">Actions</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a class="admin-page-link" asp-area="Admin" asp-controller="Pages" asp-action="Edit" asp-route-id="@item.Id">@item.Title</a>
+                                <span class="admin-page-path">/@item.Slug</span>
+                            </td>
+                            <td>
+                                <span class="status-badge @(item.IsPublished ? "status-published" : "status-draft")">
+                                    <span aria-hidden="true"></span>@(item.IsPublished ? "Published" : "Draft")
+                                </span>
+                            </td>
+                            <td>@item.LastModified.ToLocalTime().ToString("MMM d, yyyy 'at' h:mm tt")</td>
+                            <td class="admin-table-action">
+                                <a class="btn admin-btn-secondary btn-sm" asp-area="Admin" asp-controller="Pages" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

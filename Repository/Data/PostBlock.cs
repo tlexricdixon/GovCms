@@ -10,7 +10,7 @@
 
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 /// <summary>
 /// Connection between a post and a block.

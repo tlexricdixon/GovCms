@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) .NET Foundation and Contributors
  *
  * This software may be modified and distributed under the terms
@@ -10,7 +10,7 @@
 
 using Manager.Models;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
 public sealed class Post : RoutedContentBase<PostField>

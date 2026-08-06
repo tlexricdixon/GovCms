@@ -1,248 +1,160 @@
-﻿@model CmsMvc.Areas.Admin.Models.PageEditViewModel
+@model PageEditViewModel
 
 @{
     ViewData["Title"] = $"Edit {Model.Title}";
-    // var blocks = Model.PageBlocks
-    //    .OrderBy(block => block.SortOrder)
-    //    .ThenBy(block => block.Id)
-    //    .ToList();
-
-    // var blockIndex = 0;
+    var blocks = Model.PageBlocks.OrderBy(block => block.SortOrder).ThenBy(block => block.Id).ToList();
+    var blockIndex = 0;
 }
 
-<div class="d-flex justify-content-between align-items-start mb-4">
-    <div>
-        <h1>Edit Page</h1>
-        <p class="text-muted mb-0">
-            Update page details and manage content blocks.
-        </p>
-    </div>
+<nav class="admin-breadcrumb" aria-label="Breadcrumb">
+    <a asp-area="Admin" asp-controller="Pages" asp-action="Index">Pages</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">@Model.Title</span>
+</nav>
 
+<div class="admin-page-heading editor-heading">
     <div>
-        <a asp-area=""
-           asp-controller="Page"
-           asp-action="Preview"
-           asp-route-slug="@Model.Slug"
-           class="btn btn-outline-secondary"
-           target="_blank">
-            Preview
-        </a>
+        <div class="admin-title-line">
+            <h1>@Model.Title</h1>
+            <span class="status-badge @(Model.IsPublished ? "status-published" : "status-draft")">
+                <span aria-hidden="true"></span>@(Model.IsPublished ? "Published" : "Draft")
+            </span>
+        </div>
+        <p>/pages/@Model.Slug</p>
+    </div>
+    <div class="admin-heading-actions">
         @if (Model.IsPublished)
         {
-            <form asp-area="Admin"
-                  asp-controller="Pages"
-                  asp-action="Unpublish"
-                  asp-route-id="@Model.Id"
-                  method="post">
-                <button type="submit"
-                        class="btn btn-outline-warning">
-                    Unpublish
-                </button>
-            </form>
-        }
-        else
-        {
-            <form asp-area="Admin"
-                  asp-controller="Pages"
-                  asp-action="Publish"
-                  asp-route-id="@Model.Id"
-                  method="post">
-                <button type="submit"
-                        class="btn btn-success">
-                    Publish
-                </button>
-            </form>
+            <a asp-area="" asp-controller="Page" asp-action="Details" asp-route-slug="@Model.Slug"
+               class="btn admin-btn-secondary" target="_blank" rel="noopener">View page <span aria-hidden="true">↗</span></a>
         }
     </div>
 </div>
 
 @if (TempData["SuccessMessage"] is string successMessage)
 {
-    <div class="alert alert-success" role="status">
-        @successMessage
-    </div>
+    <div class="admin-alert admin-alert-success" role="status"><span aria-hidden="true">✓</span>@successMessage</div>
 }
 
-<form asp-area="Admin"
-      asp-controller="Pages"
-      asp-action="Edit"
-      asp-route-id="@Model.Id"
-      method="post">
+<div class="editor-grid">
+    <div class="editor-main">
+        <details class="admin-panel page-settings">
+            <summary>
+                <span><strong>Page settings</strong><small>Title and web address</small></span>
+                <span aria-hidden="true">⌄</span>
+            </summary>
+            <form asp-area="Admin" asp-controller="Pages" asp-action="Edit" asp-route-id="@Model.Id" method="post" class="page-settings-form">
+                <input asp-for="Id" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="admin-validation" role="alert"></div>
+                <div class="admin-field">
+                    <label asp-for="Title" class="form-label">Page title</label>
+                    <input asp-for="Title" class="form-control admin-input" autocomplete="off" />
+                    <span asp-validation-for="Title" class="admin-field-error"></span>
+                </div>
+                <div class="admin-field">
+                    <label asp-for="Slug" class="form-label">Web address</label>
+                    <div class="admin-url-input"><span aria-hidden="true">/pages/</span><input asp-for="Slug" class="form-control admin-input" autocomplete="off" /></div>
+                    <span asp-validation-for="Slug" class="admin-field-error"></span>
+                </div>
+                <button type="submit" class="btn admin-btn-primary">Save settings</button>
+            </form>
+        </details>
 
-    @Html.AntiForgeryToken()
+        <section class="content-canvas" aria-labelledby="content-heading">
+            <div class="content-canvas-heading">
+                <div>
+                    <p class="admin-eyebrow">Page canvas</p>
+                    <h2 id="content-heading">Content</h2>
+                </div>
+                <span>@blocks.Count @(blocks.Count == 1 ? "block" : "blocks")</span>
+            </div>
 
-    <input asp-for="Id" type="hidden" />
-
-    <div asp-validation-summary="ModelOnly"
-         class="text-danger mb-3"></div>
-
-    <div class="mb-3">
-        <label asp-for="Title" class="form-label">Title</label>
-        <input asp-for="Title"
-               class="form-control"
-               autocomplete="off" />
-        <span asp-validation-for="Title"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Slug" class="form-label">Slug</label>
-        <input asp-for="Slug"
-               class="form-control"
-               autocomplete="off"
-               aria-describedby="slug-help" />
-
-        <div id="slug-help" class="form-text">
-            Lowercase letters, numbers, and hyphens only.
-        </div>
-
-        <span asp-validation-for="Slug"
-              class="text-danger"></span>
-    </div>
-
-    <dl class="row">
-        <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9">
-            @(Model.IsPublished ? "Published" : "Draft")
-        </dd>
-
-        <dt class="col-sm-3">Published</dt>
-        <dd class="col-sm-9">
-            @(Model.PublishedAt?.ToLocalTime().ToString("g") ?? "Not published")
-        </dd>
-
-        <dt class="col-sm-3">Last modified</dt>
-        <dd class="col-sm-9">
-            @Model.LastModified.ToLocalTime().ToString("g")
-        </dd>
-    </dl>
-
-    <button type="submit" class="btn btn-primary">
-        Save Changes
-    </button>
-
-    <a asp-action="Index" class="btn btn-link">
-        Back to Pages
-    </a>
-</form>
-
-<hr class="my-5" />
-
-@* <section aria-labelledby="blocks-heading">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 id="blocks-heading">Content Blocks</h2>
-    </div>
-    <form asp-area="Admin"
-          asp-controller="Pages"
-          asp-action="AddBlock"
-          asp-route-id="@Model.Id"
-          method="post"
-          class="d-flex gap-2 align-items-end">
-
-        <div>
-            <label asp-for="NewBlockType" class="form-label">
-                Block type
-            </label>
-
-            <select id="BlockType"
-                    name="BlockType"
-                    class="form-select"
-                    asp-items="Html.GetEnumSelectList<CmsModels.BlockType>()">
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-outline-primary">
-            Add Block
-        </button>
-    </form>
-    @if (Model.PageBlocks.Count > 0)
-    {
-        <ol class="list-group list-group-numbered">
-            @foreach (var block in blocks)
+            @if (blocks.Count == 0)
             {
-                var isFirst = blockIndex == 0;
-                var isLast = blockIndex == blocks.Count - 1;
-
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-start gap-3">
-                        <div>
-                            <strong>@block.BlockType</strong>
-
-                            @switch (block.BlockType)
-                            {
-                                case CmsModels.BlockType.Heading:
-                                    <div>@block.HeadingText</div>
-                                    break;
-
-                                case CmsModels.BlockType.Paragraph:
-                                    <div>@block.ParagraphText</div>
-                                    break;
-
-                                case CmsModels.BlockType.Link:
-                                    <div>
-                                        @block.LinkText
-                                        <span class="text-muted">
-                                            (@block.LinkUrl)
-                                        </span>
-                                    </div>
-                                    break;
-                            }
-                        </div>
-
-                        <div class="d-flex flex-wrap gap-2">
-                            <form asp-area="Admin"
-                                  asp-controller="Pages"
-                                  asp-action="MoveBlockUp"
-                                  asp-route-pageId="@Model.Id"
-                                  asp-route-blockId="@block.Id"
-                                  method="post">
-                                <button type="submit"
-                                        class="btn btn-sm btn-outline-secondary"
-                                        disabled="@isFirst">
-                                    Move Up
-                                </button>
-                            </form>
-
-                            <form asp-area="Admin"
-                                  asp-controller="Pages"
-                                  asp-action="MoveBlockDown"
-                                  asp-route-pageId="@Model.Id"
-                                  asp-route-blockId="@block.Id"
-                                  method="post">
-                                <button type="submit"
-                                        class="btn btn-sm btn-outline-secondary"
-                                        disabled="@isLast">
-                                    Move Down
-                                </button>
-                            </form>
-
-                            <a asp-area="Admin"
-                               asp-controller="Pages"
-                               asp-action="EditBlock"
-                               asp-route-pageId="@Model.Id"
-                               asp-route-blockId="@block.Id"
-                               class="btn btn-sm btn-outline-primary">
-                                Edit
-                            </a>
-
-                            <form asp-area="Admin"
-                                  asp-controller="Pages"
-                                  asp-action="DeleteBlock"
-                                  asp-route-pageId="@Model.Id"
-                                  asp-route-blockId="@block.Id"
-                                  method="post">
-                                <button type="submit"
-                                        class="btn btn-sm btn-outline-danger"
-                                        onclick="return confirm('Delete this block?');">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </li>
-
-                blockIndex++;
+                <div class="canvas-empty">
+                    <span aria-hidden="true">＋</span>
+                    <h3>Build your page</h3>
+                    <p>Choose a content block from the panel to get started.</p>
+                </div>
             }
-        </ol>
-    }
-</section> *@
+            else
+            {
+                <ol class="block-list">
+                    @foreach (var block in blocks)
+                    {
+                        var isFirst = blockIndex == 0;
+                        var isLast = blockIndex == blocks.Count - 1;
+                        <li class="block-card">
+                            <div class="block-handle" aria-hidden="true">⠿</div>
+                            <div class="block-body">
+                                <div class="block-label">@block.BlockType</div>
+                                <div class="block-preview">@(string.IsNullOrWhiteSpace(block.Summary) ? "Empty block — select Edit to add content." : block.Summary)</div>
+                            </div>
+                            <div class="block-actions" aria-label="Actions for @block.BlockType block">
+                                <form asp-action="MoveBlockUp" asp-route-pageId="@Model.Id" asp-route-blockId="@block.Id" method="post">
+                                    <button type="submit" class="block-icon-button" disabled="@isFirst" title="Move up"><span aria-hidden="true">↑</span><span class="visually-hidden">Move up</span></button>
+                                </form>
+                                <form asp-action="MoveBlockDown" asp-route-pageId="@Model.Id" asp-route-blockId="@block.Id" method="post">
+                                    <button type="submit" class="block-icon-button" disabled="@isLast" title="Move down"><span aria-hidden="true">↓</span><span class="visually-hidden">Move down</span></button>
+                                </form>
+                                <a asp-action="EditBlock" asp-route-pageId="@Model.Id" asp-route-blockId="@block.Id" class="btn admin-btn-secondary btn-sm">Edit</a>
+                                <form asp-action="DeleteBlock" asp-route-pageId="@Model.Id" asp-route-blockId="@block.Id" method="post">
+                                    <button type="submit" class="block-icon-button danger" title="Delete"><span aria-hidden="true">×</span><span class="visually-hidden">Delete</span></button>
+                                </form>
+                            </div>
+                        </li>
+                        blockIndex++;
+                    }
+                </ol>
+            }
+        </section>
+    </div>
+
+    <aside class="editor-sidebar" aria-label="Page tools">
+        <section class="admin-panel publish-card" aria-labelledby="publish-heading">
+            <div class="admin-panel-heading"><div><h2 id="publish-heading">Publishing</h2><p>Control public visibility.</p></div></div>
+            <dl class="publish-details">
+                <div><dt>Status</dt><dd>@(Model.IsPublished ? "Published" : "Draft")</dd></div>
+                <div><dt>Last saved</dt><dd>@Model.LastModified.ToLocalTime().ToString("MMM d, h:mm tt")</dd></div>
+                @if (Model.PublishedAt.HasValue)
+                {
+                    <div><dt>Published</dt><dd>@Model.PublishedAt.Value.ToLocalTime().ToString("MMM d, yyyy")</dd></div>
+                }
+            </dl>
+            @if (Model.IsPublished)
+            {
+                <form asp-area="Admin" asp-controller="Pages" asp-action="Unpublish" asp-route-id="@Model.Id" method="post">
+                    <button type="submit" class="btn admin-btn-secondary w-100">Return to draft</button>
+                </form>
+            }
+            else
+            {
+                <form asp-area="Admin" asp-controller="Pages" asp-action="Publish" asp-route-id="@Model.Id" method="post">
+                    <button type="submit" class="btn admin-btn-publish w-100">Publish page</button>
+                </form>
+            }
+        </section>
+
+        <section class="admin-panel block-library" aria-labelledby="blocks-heading">
+            <div class="admin-panel-heading"><div><h2 id="blocks-heading">Add content</h2><p>Choose a block to add to the page.</p></div></div>
+            <form asp-area="Admin" asp-controller="Pages" asp-action="AddBlock" asp-route-id="@Model.Id" method="post" class="block-picker">
+                <button type="submit" name="BlockType" value="@((int)BlockType.Heading)" class="block-picker-button">
+                    <span class="block-picker-icon block-picker-heading" aria-hidden="true">H</span>
+                    <span><strong>Heading</strong><small>Organize content</small></span>
+                    <span aria-hidden="true">＋</span>
+                </button>
+                <button type="submit" name="BlockType" value="@((int)BlockType.Paragraph)" class="block-picker-button">
+                    <span class="block-picker-icon" aria-hidden="true">¶</span>
+                    <span><strong>Paragraph</strong><small>Add body text</small></span>
+                    <span aria-hidden="true">＋</span>
+                </button>
+                <button type="submit" name="BlockType" value="@((int)BlockType.Link)" class="block-picker-button">
+                    <span class="block-picker-icon" aria-hidden="true">↗</span>
+                    <span><strong>Link</strong><small>Point to a resource</small></span>
+                    <span aria-hidden="true">＋</span>
+                </button>
+            </form>
+            <p class="block-library-note">Sections and column layouts will live here next.</p>
+        </section>
+    </aside>
+</div>

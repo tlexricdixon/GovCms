@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) .NET Foundation and Contributors
  *
  * This software may be modified and distributed under the terms
@@ -11,7 +11,7 @@
 using Manager.Models;
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
 public sealed class PageField : ContentFieldBase
