@@ -1,1 +1,45 @@
-﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="admin-page-heading">
+    <div>
+        <p class="admin-eyebrow">Workspace</p>
+        <h1>Welcome back</h1>
+        <p>Build and manage clear, accessible content for your public website.</p>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+    <a class="dashboard-card dashboard-card-primary" asp-area="Admin" asp-controller="Pages" asp-action="Create">
+        <span class="dashboard-card-icon" aria-hidden="true">＋</span>
+        <span>
+            <strong>Create a page</strong>
+            <small>Start a new draft and add content blocks.</small>
+        </span>
+        <span class="dashboard-card-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <a class="dashboard-card" asp-area="Admin" asp-controller="Pages" asp-action="Index">
+        <span class="dashboard-card-icon" aria-hidden="true">▤</span>
+        <span>
+            <strong>Manage pages</strong>
+            <small>Edit, reorder, publish, or unpublish content.</small>
+        </span>
+        <span class="dashboard-card-arrow" aria-hidden="true">→</span>
+    </a>
+</div>
+
+<section class="admin-panel admin-getting-started" aria-labelledby="getting-started-heading">
+    <div class="admin-panel-heading">
+        <div>
+            <p class="admin-eyebrow">Getting started</p>
+            <h2 id="getting-started-heading">A simple publishing path</h2>
+        </div>
+    </div>
+    <ol class="workflow-steps">
+        <li><span>1</span><div><strong>Create a draft</strong><p>Give the page a clear title and web address.</p></div></li>
+        <li><span>2</span><div><strong>Build the content</strong><p>Add headings, paragraphs, and links in the order readers need them.</p></div></li>
+        <li><span>3</span><div><strong>Review and publish</strong><p>Check the page, then make it available on the public website.</p></div></li>
+    </ol>
+</section>

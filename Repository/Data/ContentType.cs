@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) .NET Foundation and Contributors
  *
  * This software may be modified and distributed under the terms
@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
 public sealed class ContentType : ContentTypeBase

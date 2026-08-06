@@ -1,121 +1,78 @@
-﻿@* @model CmsModels.PageBlock *@
+@model PageBlockEditViewModel
 
 @{
-    ViewData["Title"] = $"Edit {Model.BlockType} Block";
+    ViewData["Title"] = $"Edit {Model.BlockType} block";
 }
 
-@* <h1>Edit @Model.BlockType Block</h1>
+<nav class="admin-breadcrumb" aria-label="Breadcrumb">
+    <a asp-action="Index">Pages</a><span aria-hidden="true">/</span>
+    <a asp-action="Edit" asp-route-id="@Model.PageId">Page editor</a><span aria-hidden="true">/</span>
+    <span aria-current="page">@Model.BlockType</span>
+</nav>
 
-<form asp-area="Admin"
-      asp-controller="Pages"
-      asp-action="EditBlock"
-      asp-route-pageId="@Model.PageId"
-      asp-route-blockId="@Model.Id"
-      method="post">
+<div class="admin-page-heading compact">
+    <div>
+        <p class="admin-eyebrow">Content block</p>
+        <h1>Edit @Model.BlockType.ToString().ToLowerInvariant()</h1>
+        <p>Update the content, then return to the page canvas.</p>
+    </div>
+</div>
 
+<form asp-action="EditBlock" asp-route-pageId="@Model.PageId" asp-route-blockId="@Model.Id" method="post" class="block-edit-layout">
     <input asp-for="Id" type="hidden" />
     <input asp-for="PageId" type="hidden" />
     <input asp-for="BlockType" type="hidden" />
 
-    <div asp-validation-summary="ModelOnly"
-         class="text-danger"></div>
-
-    @switch (Model.BlockType)
-    {
-        case CmsModels.BlockType.Heading:
-            <div class="mb-3">
-                <label asp-for="HeadingText"
-                       class="form-label">
-                    Heading text
-                </label>
-
-                <input asp-for="HeadingText"
-                       class="form-control" />
-
-                <span asp-validation-for="HeadingText"
-                      class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="HeadingLevel"
-                       class="form-label">
-                    Heading level
-                </label>
-
-                <select asp-for="HeadingLevel"
-                        class="form-select">
-                    <option value="2">Heading 2</option>
-                    <option value="3">Heading 3</option>
-                    <option value="4">Heading 4</option>
-                </select>
-            </div>
-            break;
-
-        case CmsModels.BlockType.Paragraph:
-            <div class="mb-3">
-                <label asp-for="ParagraphText"
-                       class="form-label">
-                    Paragraph text
-                </label>
-
-                <textarea asp-for="ParagraphText"
-                          class="form-control"
-                          rows="8"></textarea>
-
-                <span asp-validation-for="ParagraphText"
-                      class="text-danger"></span>
-            </div>
-            break;
-
-        case CmsModels.BlockType.Link:
-            <div class="mb-3">
-                <label asp-for="LinkText"
-                       class="form-label">
-                    Link text
-                </label>
-
-                <input asp-for="LinkText"
-                       class="form-control" />
-
-                <span asp-validation-for="LinkText"
-                      class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="LinkUrl"
-                       class="form-label">
-                    Link URL
-                </label>
-
-                <input asp-for="LinkUrl"
-                       class="form-control" />
-
-                <span asp-validation-for="LinkUrl"
-                      class="text-danger"></span>
-            </div>
-
-            <div class="form-check mb-3">
-                <input asp-for="OpenInNewWindow"
-                       class="form-check-input" />
-
-                <label asp-for="OpenInNewWindow"
-                       class="form-check-label">
-                    Open in a new window
-                </label>
-            </div>
-            break;
-    }
-
-    <button type="submit"
-            class="btn btn-primary">
-        Save Block
-    </button>
-
-    <a asp-area="Admin"
-       asp-controller="Pages"
-       asp-action="Edit"
-       asp-route-id="@Model.PageId"
-       class="btn btn-link">
-        Cancel
-    </a>
-</form> *@
+    <section class="admin-panel admin-form-card">
+        <div asp-validation-summary="ModelOnly" class="admin-validation" role="alert"></div>
+        @switch (Model.BlockType)
+        {
+            case BlockType.Heading:
+                <div class="admin-field">
+                    <label asp-for="HeadingText" class="form-label">Heading text</label>
+                    <input asp-for="HeadingText" class="form-control admin-input admin-input-large" autofocus />
+                    <span asp-validation-for="HeadingText" class="admin-field-error"></span>
+                </div>
+                <div class="admin-field">
+                    <label asp-for="HeadingLevel" class="form-label">Heading level</label>
+                    <p class="admin-field-help" id="heading-help">Use levels in order. The page title is heading level 1.</p>
+                    <select asp-for="HeadingLevel" class="form-select admin-input" aria-describedby="heading-help">
+                        <option value="2">Heading 2 — main section</option><option value="3">Heading 3 — subsection</option>
+                        <option value="4">Heading 4</option><option value="5">Heading 5</option><option value="6">Heading 6</option>
+                    </select>
+                    <span asp-validation-for="HeadingLevel" class="admin-field-error"></span>
+                </div>
+                break;
+            case BlockType.Paragraph:
+                <div class="admin-field">
+                    <label asp-for="ParagraphText" class="form-label">Paragraph text</label>
+                    <p class="admin-field-help" id="paragraph-help">Write in plain language. Text is safely encoded when displayed.</p>
+                    <textarea asp-for="ParagraphText" class="form-control admin-input admin-textarea" rows="12" aria-describedby="paragraph-help" autofocus></textarea>
+                    <span asp-validation-for="ParagraphText" class="admin-field-error"></span>
+                </div>
+                break;
+            case BlockType.Link:
+                <div class="admin-field">
+                    <label asp-for="LinkText" class="form-label">Link text</label>
+                    <p class="admin-field-help" id="link-text-help">Describe where the link goes. Avoid “click here.”</p>
+                    <input asp-for="LinkText" class="form-control admin-input" aria-describedby="link-text-help" autofocus />
+                    <span asp-validation-for="LinkText" class="admin-field-error"></span>
+                </div>
+                <div class="admin-field">
+                    <label asp-for="LinkUrl" class="form-label">Link destination</label>
+                    <input asp-for="LinkUrl" class="form-control admin-input" placeholder="https:// or /pages/" />
+                    <span asp-validation-for="LinkUrl" class="admin-field-error"></span>
+                </div>
+                <div class="form-check admin-check">
+                    <input asp-for="OpenInNewWindow" class="form-check-input" />
+                    <label asp-for="OpenInNewWindow" class="form-check-label">Open in a new window</label>
+                    <p>Use only when readers need to keep this page open.</p>
+                </div>
+                break;
+        }
+        <div class="admin-form-actions">
+            <button type="submit" class="btn admin-btn-primary">Save block</button>
+            <a asp-action="Edit" asp-route-id="@Model.PageId" class="btn admin-btn-quiet">Cancel</a>
+        </div>
+    </section>
+</form>

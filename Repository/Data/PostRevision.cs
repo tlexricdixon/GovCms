@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 public class PostRevision : ContentRevisionBase
 {

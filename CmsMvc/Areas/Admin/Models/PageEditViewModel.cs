@@ -1,5 +1,4 @@
 ﻿using Manager.Models;
-using Manager.Models.Extend.Blocks;
 using System.ComponentModel.DataAnnotations;
 
 namespace CmsMvc.Areas.Admin.Models;
@@ -27,6 +26,6 @@ public sealed class PageEditViewModel
 
     public BlockType NewBlockType { get; set; }
 
-    public IReadOnlyList<PageBlock> PageBlocks { get; set; }
-        = Array.Empty<PageBlock>();
+    public IReadOnlyList<PageBlockListItemViewModel> PageBlocks { get; set; }
+        = Array.Empty<PageBlockListItemViewModel>();
 }

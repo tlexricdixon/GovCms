@@ -10,7 +10,7 @@
 
 using Manager.Cache;
 using Manager.Contracts;
-using Manager.Manager;
+using Manager;
 using Manager.Models;
 using Manager.Models.Extend.Fields;
 using System.ComponentModel.DataAnnotations;

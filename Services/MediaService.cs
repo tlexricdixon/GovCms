@@ -11,7 +11,7 @@
 using Manager;
 using Manager.Cache;
 using Manager.Contracts;
-using Manager.Manager;
+using Manager;
 using Manager.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Text;

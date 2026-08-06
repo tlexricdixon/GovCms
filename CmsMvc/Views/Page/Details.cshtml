@@ -1,38 +1,42 @@
-﻿@* @model CmsModels.Page
+@model CmsMvc.Models.PageDisplayViewModel
 
 @{
     ViewData["Title"] = Model.Title;
 }
 
-<h1>@Model.Title</h1>
+<article>
+    <h1>@Model.Title</h1>
 
-@foreach (var block in Model.PageBlocks.OrderBy(block => block.SortOrder))
-{
-    switch (block.BlockType)
+    @foreach (var block in Model.Blocks)
     {
-        case CmsModels.BlockType.Heading:
-            switch (block.HeadingLevel)
-            {
-                case 3:
-                    <h3>@block.HeadingText</h3>
-                    break;
-                case 4:
-                    <h4>@block.HeadingText</h4>
-                    break;
-                default:
-                    <h2>@block.HeadingText</h2>
-                    break;
-            }
-            break;
+        switch (block.BlockType)
+        {
+            case Manager.Models.BlockType.Heading:
+                switch (block.HeadingLevel)
+                {
+                    case 3:
+                        <h3>@block.HeadingText</h3>
+                        break;
+                    case 4:
+                        <h4>@block.HeadingText</h4>
+                        break;
+                    case 5:
+                        <h5>@block.HeadingText</h5>
+                        break;
+                    case 6:
+                        <h6>@block.HeadingText</h6>
+                        break;
+                    default:
+                        <h2>@block.HeadingText</h2>
+                        break;
+                }
+                break;
 
-        case CmsModels.BlockType.Paragraph:
-            <p>@block.ParagraphText</p>
-            break;
+            case Manager.Models.BlockType.Paragraph:
+                <p>@block.ParagraphText</p>
+                break;
 
-        case CmsModels.BlockType.Link:
-            if (!string.IsNullOrWhiteSpace(block.LinkUrl) &&
-                !string.IsNullOrWhiteSpace(block.LinkText))
-            {
+            case Manager.Models.BlockType.Link when block.LinkUrl is not null:
                 <p>
                     <a href="@block.LinkUrl"
                        target="@(block.OpenInNewWindow ? "_blank" : null)"
@@ -40,8 +44,7 @@
                         @block.LinkText
                     </a>
                 </p>
-            }
-            break;
+                break;
+        }
     }
-}
- *@
+</article>

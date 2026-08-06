@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Localization\Localization.csproj" />
-    <ProjectReference Include="..\Models\Manager.csproj" />
+    <ProjectReference Include="..\Manager\Manager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

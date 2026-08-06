@@ -9,7 +9,7 @@
  */
 
 using Manager.Contracts;
-using Manager.Manager;
+using Manager;
 using Manager.Models;
 using Manager.Models.Extend;
 using Microsoft.Extensions.DependencyInjection;

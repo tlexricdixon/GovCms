@@ -363,3 +363,18 @@ MigrationBackup/
 FodyWeavers.xsd
 /CmsTests/CmsTests.csproj
 /SyncService/Service.csproj
+
+# Local configuration and secrets
+**/appsettings.Local.json
+**/appsettings.*.Local.json
+.env
+.env.*
+!.env.example
+secrets.json
+
+# Local database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3

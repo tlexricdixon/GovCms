@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 /// <summary>
 /// Content field for a block.

@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 /// <summary>
 /// The different types of taxonomies

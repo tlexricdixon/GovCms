@@ -8,7 +8,7 @@
  *
  */
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 /// <summary>
 /// Connection between a page and a content.

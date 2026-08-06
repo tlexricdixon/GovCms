@@ -11,7 +11,7 @@
 using Manager.Models;
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 [Serializable]
 public sealed class PostField : ContentFieldBase

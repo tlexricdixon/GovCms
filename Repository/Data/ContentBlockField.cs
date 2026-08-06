@@ -8,10 +8,10 @@
  *
  */
 
-using Manager.Manager;
+using Manager;
 using Newtonsoft.Json;
 
-namespace Piranha.Data;
+namespace Repository.Data;
 
 /// <summary>
 /// Content field for a block.

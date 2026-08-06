@@ -1,54 +1,62 @@
-﻿@model PageCreateViewModel
+@model PageCreateViewModel
 
 @{
-    ViewData["Title"] = "Create Page";
+    ViewData["Title"] = "Create page";
 }
 
-<h1>Create Page</h1>
+<nav class="admin-breadcrumb" aria-label="Breadcrumb">
+    <a asp-area="Admin" asp-controller="Pages" asp-action="Index">Pages</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Create</span>
+</nav>
 
-<form asp-area="Admin"
-      asp-controller="Pages"
-      asp-action="Create"
-      method="post">
-
-    <div asp-validation-summary="ModelOnly"
-         class="text-danger"></div>
-
-    <div class="mb-3">
-        <label asp-for="Title" class="form-label"></label>
-
-        <input asp-for="Title"
-               class="form-control"
-               autocomplete="off" />
-<p>This is the direcory level</p>
-        <span asp-validation-for="Title"
-              class="text-danger"></span>
+<div class="admin-page-heading compact">
+    <div>
+        <p class="admin-eyebrow">New content</p>
+        <h1>Create a page</h1>
+        <p>Start with the page details. You’ll add and arrange the content next.</p>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="Slug" class="form-label"></label>
-
-        <input asp-for="Slug"
-               class="form-control"
-               autocomplete="off"
-               aria-describedby="slug-help" />
-<p>This is the page action</p>
-        <div id="slug-help" class="form-text">
-            Example: about-us
+<form asp-area="Admin" asp-controller="Pages" asp-action="Create" method="post" class="admin-form-layout">
+    <section class="admin-panel admin-form-card" aria-labelledby="details-heading">
+        <div class="admin-panel-heading">
+            <div>
+                <h2 id="details-heading">Page details</h2>
+                <p>These details identify the page in the editor and on the website.</p>
+            </div>
         </div>
 
-        <span asp-validation-for="Slug"
-              class="text-danger"></span>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">
-        Create Draft
-    </button>
+        <div asp-validation-summary="ModelOnly" class="admin-validation" role="alert"></div>
 
-    <a asp-area="Admin"
-       asp-controller="Pages"
-       asp-action="Index"
-       class="btn btn-link">
-        Cancel
-    </a>
+        <div class="admin-field">
+            <label asp-for="Title" class="form-label">Page title</label>
+            <p class="admin-field-help" id="title-help">Use a short title that clearly describes this page.</p>
+            <input asp-for="Title" class="form-control admin-input" autocomplete="off" aria-describedby="title-help" autofocus />
+            <span asp-validation-for="Title" class="admin-field-error"></span>
+        </div>
+
+        <div class="admin-field">
+            <label asp-for="Slug" class="form-label">Web address</label>
+            <p class="admin-field-help" id="slug-help">Use lowercase letters, numbers, and hyphens. Example: <strong>about-us</strong></p>
+            <div class="admin-url-input">
+                <span aria-hidden="true">/pages/</span>
+                <input asp-for="Slug" class="form-control admin-input" autocomplete="off" aria-describedby="slug-help" />
+            </div>
+            <span asp-validation-for="Slug" class="admin-field-error"></span>
+        </div>
+
+        <div class="admin-form-actions">
+            <button type="submit" class="btn admin-btn-primary">Create draft</button>
+            <a asp-area="Admin" asp-controller="Pages" asp-action="Index" class="btn admin-btn-quiet">Cancel</a>
+        </div>
+    </section>
+
+    <aside class="admin-tip-card">
+        <span class="admin-tip-icon" aria-hidden="true">i</span>
+        <div>
+            <h2>What happens next?</h2>
+            <p>The new page stays private as a draft. You can add content, review it, and publish only when it is ready.</p>
+        </div>
+    </aside>
 </form>

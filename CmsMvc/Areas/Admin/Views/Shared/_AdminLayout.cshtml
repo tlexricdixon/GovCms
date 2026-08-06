@@ -1,127 +1,63 @@
-﻿@* @inject Microsoft.Extensions.Options.IOptions<ManagerOptions> Options
-@inject Piranha.Config Config
-@{
-    // var module = Piranha.App.Modules.Get<Piranha.Manager.Module>();
-    // var prerelease = Piranha.Utils.IsPreRelease(typeof(Piranha.Manager.Module).Assembly) ? "pre-release" : "";
-    // var isRightToLeft = @System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft;
-    // var version = Piranha.Utils.GetAssemblyVersionHash(typeof(Piranha.Manager.Module).Assembly);
-} *@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-@*     @if (isRightToLeft)
-    {
-        <link rel="stylesheet" href="~/manager/assets/css/full.rtl.min.css?v=@version">
-    }
-    else
-    {
-        <link rel="stylesheet" href="~/manager/assets/css/full.min.css?v=@version">
-    }
-    <link rel="icon" href="~/manager/assets/img/logo.png">
-
-    @foreach (var style in module.Styles)
-    {
-        <link href="@Url.Content(style)" rel="stylesheet" type="text/css" />
-    } *@
-
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>@ViewData["Title"] - GovCms Administration</title>
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" asp-append-version="true" />
 </head>
-<body>
-@*     @if (!string.IsNullOrEmpty(prerelease))
-    {
-        <div class="pre-release">Pre-release</div>
-    } *@
-    <partial name="~/Areas/Manager/Shared/Partial/_Menu.cshtml" />
+<body class="admin-body">
+    <a class="admin-skip-link" href="#admin-main">Skip to main content</a>
 
-    @RenderBody()
+    <div class="admin-shell">
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <a class="admin-brand" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                <span class="admin-brand-mark" aria-hidden="true">G</span>
+                <span>
+                    <strong>GovCms</strong>
+                    <small>Administration</small>
+                </span>
+            </a>
 
-    <partial name="~/Areas/Manager/Shared/Partial/_BlockPickerModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_MediaPickerModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_ContentPickerModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_ArchivePickerModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_PagePickerModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_PostPickerModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_PreviewModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_LanguageEditModal.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_Notifications.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_MediaUploadTemplate.cshtml" />
-    <partial name="~/Areas/Manager/Shared/Partial/_AlertDialog.cshtml" />
-@*     @foreach (var partial in module.Partials)
-    {
-        <partial name="@partial" />
-    }
+            <nav class="admin-nav" aria-label="Administration">
+                <p class="admin-nav-label">Workspace</p>
+                <a class="admin-nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                    <span class="admin-nav-icon" aria-hidden="true">⌂</span>
+                    Dashboard
+                </a>
+                <a class="admin-nav-link" asp-area="Admin" asp-controller="Pages" asp-action="Index">
+                    <span class="admin-nav-icon" aria-hidden="true">▤</span>
+                    Pages
+                </a>
+            </nav>
 
-    <script type="text/javascript">
-            var piranha = {};
-            window.piranha = piranha;
-            piranha.baseUrl = "@Url.Content("~/")";
-            piranha.antiForgery = {
-                cookieName: "@Options.Value.XsrfCookieName",
-                headerName: "@Options.Value.XsrfHeaderName"
-            };
-            piranha.xhrTimeout = @Config.ManagerXhrTimeout;
-    </script> *@
+            <div class="admin-sidebar-footer">
+                <span class="admin-environment">Development</span>
+                <a asp-area="" asp-controller="Home" asp-action="Index">View website</a>
+            </div>
+        </aside>
 
-    <partial name="~/Areas/Manager/Shared/Partial/_EditorConfig.cshtml" />
+        <div class="admin-workspace">
+            <header class="admin-topbar">
+                <button class="admin-menu-button" type="button" aria-label="Open navigation" aria-controls="admin-sidebar">
+                    <span aria-hidden="true">☰</span>
+                </button>
+                <div class="admin-topbar-title">Content management</div>
+                <div class="admin-user" aria-label="Current user">
+                    <span class="admin-avatar" aria-hidden="true">A</span>
+                    <span>Administrator</span>
+                </div>
+            </header>
 
-    @RenderSection("partials", required: false)
+            <main id="admin-main" class="admin-main" tabindex="-1">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
 
-@*     <environment include="Development">
-        <script type="text/javascript" src="~/manager/assets/js/piranha-deps-dev.js?v=@version"></script>
-    </environment>
-    <environment exclude="Development">
-        <script type="text/javascript" src="~/manager/assets/js/piranha-deps.min.js?v=@version"></script>
-    </environment>
-    @foreach (var script in module.Scripts.Where(s => s.RenderBeforeCoreScripts))
-    {
-        if (string.IsNullOrWhiteSpace(script.Integrity))
-        {
-            <script type="@script.Type" src="@Url.Content(script.Src)"></script>
-        }
-        else if (script.CrossOriginValue == ECrossOriginPolicy.None)
-        {
-            <script type="@script.Type" src="@Url.Content(script.Src)" integrity="@script.Integrity"></script>
-        }
-        else
-        {
-            <script type="@script.Type" src="@Url.Content(script.Src)" integrity="@script.Integrity" crossorigin="@script.GetCrossOriginValueStrValue()"></script>
-        }
-    } *@
-@*     <script type="text/javascript" src="~/manager/assets/js/piranha.min.js?v=@version"></script>
-    <script type="text/javascript">
-        Vue.prototype.piranha = window.piranha;
-    </script> *@
-
-    @if (!string.IsNullOrWhiteSpace(ViewBag.Message))
-    {
-        <script>
-            piranha.notifications.push({
-            body: "@Html.Raw(ViewBag.Message)",
-            type: "@Html.Raw(ViewBag.MessageCss)",
-            hide: true
-            });
-        </script>
-    }
-
-    <partial name="~/Areas/Manager/Shared/Partial/_Resources.cshtml" />
-
-@*     @foreach (var script in module.Scripts.Where(s => !s.RenderBeforeCoreScripts))
-    {
-        if (string.IsNullOrWhiteSpace(script.Integrity))
-        {
-            <script type="@script.Type" src="@Url.Content(script.Src)"></script>
-        }
-        else if (script.CrossOriginValue == ECrossOriginPolicy.None)
-        {
-            <script type="@script.Type" src="@Url.Content(script.Src)" integrity="@script.Integrity"></script>
-        }
-        else
-        {
-            <script type="@script.Type" src="@Url.Content(script.Src)" integrity="@script.Integrity" crossorigin="@script.GetCrossOriginValueStrValue()"></script>
-        }
-    } *@
-    @RenderSection("script", required: false)
+    <script src="~/bootstrap/js/bootstrap.bundle.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
